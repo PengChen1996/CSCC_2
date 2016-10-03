@@ -13,5 +13,7 @@ public interface MakerGoodsMapper {
 
     int updateByPrimaryKeySelective(MakerGoods record);
 
+    int updateByPrimaryKeyWithBLOBs(MakerGoods record);
+
     int updateByPrimaryKey(MakerGoods record);
 }

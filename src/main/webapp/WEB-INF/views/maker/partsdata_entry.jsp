@@ -29,7 +29,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	部件名称：<input type="text" name="partsName"><br>
     	部件图片：<input type="text" name="partsPicture"><br>
     	部件描述：<input type="text" name="partsDecsription"><br>
-    	生产时间：<input type="text" name="productionTime" id="indate"><br>
+    	生产时间：<input type="text" name="productionTime" id="partsdate"><br>
     	生产地点：<input type="text" name="productionArea"><br>
     	<!-- 属于<input type="text" name="belongs"><br>
     	签名1：<input type="text" name="signatureOne"><br>
@@ -40,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </form>
     <script type="text/javascript">
     	jeDate({
-			    dateCell:"#indate",
+			    dateCell:"#partsdate",
 			    skinCell:"jedateblue",
 			    format:"YYYY-MM-DD hh:mm",
 			    isinitVal:true,

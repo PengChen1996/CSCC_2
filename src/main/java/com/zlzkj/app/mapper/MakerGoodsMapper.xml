@@ -5,8 +5,7 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="goods_id" property="goodsId" jdbcType="VARCHAR" />
     <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
-    <result column="goods_picture" property="goodsPicture" jdbcType="VARCHAR" />
-    <result column="goods_price" property="goodsPrice" jdbcType="DOUBLE" />
+    <result column="goods_price" property="goodsPrice" jdbcType="VARCHAR" />
     <result column="goods_material" property="goodsMaterial" jdbcType="VARCHAR" />
     <result column="goods_description" property="goodsDescription" jdbcType="VARCHAR" />
     <result column="making_time" property="makingTime" jdbcType="VARCHAR" />
@@ -17,16 +16,25 @@
     <result column="first_signtime" property="firstSigntime" jdbcType="VARCHAR" />
     <result column="signature_two" property="signatureTwo" jdbcType="VARCHAR" />
     <result column="second_signtime" property="secondSigntime" jdbcType="VARCHAR" />
+    <result column="colormobi" property="colormobi" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="INTEGER" />
   </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zlzkj.app.model.MakerGoods" extends="BaseResultMap" >
+    <result column="goods_picture" property="goodsPicture" jdbcType="LONGVARCHAR" />
+  </resultMap>
   <sql id="Base_Column_List" >
-    id, goods_id, goods_name, goods_picture, goods_price, goods_material, goods_description, 
-    making_time, production_time, production_area, quality_guarantee, signature_one, 
-    first_signtime, signature_two, second_signtime, status
+    id, goods_id, goods_name, goods_price, goods_material, goods_description, making_time, 
+    production_time, production_area, quality_guarantee, signature_one, first_signtime, 
+    signature_two, second_signtime, colormobi, status
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <sql id="Blob_Column_List" >
+    goods_picture
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
     from x_goods
     where id = #{id,jdbcType=INTEGER}
   </select>
@@ -36,17 +44,17 @@
   </delete>
   <insert id="insert" parameterType="com.zlzkj.app.model.MakerGoods" >
     insert into x_goods (id, goods_id, goods_name, 
-      goods_picture, goods_price, goods_material, 
-      goods_description, making_time, production_time, 
-      production_area, quality_guarantee, signature_one, 
-      first_signtime, signature_two, second_signtime, 
-      status)
+      goods_price, goods_material, goods_description, 
+      making_time, production_time, production_area, 
+      quality_guarantee, signature_one, first_signtime, 
+      signature_two, second_signtime, colormobi, 
+      status, goods_picture)
     values (#{id,jdbcType=INTEGER}, #{goodsId,jdbcType=VARCHAR}, #{goodsName,jdbcType=VARCHAR}, 
-      #{goodsPicture,jdbcType=VARCHAR}, #{goodsPrice,jdbcType=DOUBLE}, #{goodsMaterial,jdbcType=VARCHAR}, 
-      #{goodsDescription,jdbcType=VARCHAR}, #{makingTime,jdbcType=VARCHAR}, #{productionTime,jdbcType=VARCHAR}, 
-      #{productionArea,jdbcType=VARCHAR}, #{qualityGuarantee,jdbcType=VARCHAR}, #{signatureOne,jdbcType=VARCHAR}, 
-      #{firstSigntime,jdbcType=VARCHAR}, #{signatureTwo,jdbcType=VARCHAR}, #{secondSigntime,jdbcType=VARCHAR}, 
-      #{status,jdbcType=INTEGER})
+      #{goodsPrice,jdbcType=VARCHAR}, #{goodsMaterial,jdbcType=VARCHAR}, #{goodsDescription,jdbcType=VARCHAR}, 
+      #{makingTime,jdbcType=VARCHAR}, #{productionTime,jdbcType=VARCHAR}, #{productionArea,jdbcType=VARCHAR}, 
+      #{qualityGuarantee,jdbcType=VARCHAR}, #{signatureOne,jdbcType=VARCHAR}, #{firstSigntime,jdbcType=VARCHAR}, 
+      #{signatureTwo,jdbcType=VARCHAR}, #{secondSigntime,jdbcType=VARCHAR}, #{colormobi,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{goodsPicture,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.zlzkj.app.model.MakerGoods" >
     insert into x_goods
@@ -59,9 +67,6 @@
       </if>
       <if test="goodsName != null" >
         goods_name,
-      </if>
-      <if test="goodsPicture != null" >
-        goods_picture,
       </if>
       <if test="goodsPrice != null" >
         goods_price,
@@ -96,8 +101,14 @@
       <if test="secondSigntime != null" >
         second_signtime,
       </if>
+      <if test="colormobi != null" >
+        colormobi,
+      </if>
       <if test="status != null" >
         status,
+      </if>
+      <if test="goodsPicture != null" >
+        goods_picture,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -110,11 +121,8 @@
       <if test="goodsName != null" >
         #{goodsName,jdbcType=VARCHAR},
       </if>
-      <if test="goodsPicture != null" >
-        #{goodsPicture,jdbcType=VARCHAR},
-      </if>
       <if test="goodsPrice != null" >
-        #{goodsPrice,jdbcType=DOUBLE},
+        #{goodsPrice,jdbcType=VARCHAR},
       </if>
       <if test="goodsMaterial != null" >
         #{goodsMaterial,jdbcType=VARCHAR},
@@ -146,8 +154,14 @@
       <if test="secondSigntime != null" >
         #{secondSigntime,jdbcType=VARCHAR},
       </if>
+      <if test="colormobi != null" >
+        #{colormobi,jdbcType=VARCHAR},
+      </if>
       <if test="status != null" >
         #{status,jdbcType=INTEGER},
+      </if>
+      <if test="goodsPicture != null" >
+        #{goodsPicture,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -160,11 +174,8 @@
       <if test="goodsName != null" >
         goods_name = #{goodsName,jdbcType=VARCHAR},
       </if>
-      <if test="goodsPicture != null" >
-        goods_picture = #{goodsPicture,jdbcType=VARCHAR},
-      </if>
       <if test="goodsPrice != null" >
-        goods_price = #{goodsPrice,jdbcType=DOUBLE},
+        goods_price = #{goodsPrice,jdbcType=VARCHAR},
       </if>
       <if test="goodsMaterial != null" >
         goods_material = #{goodsMaterial,jdbcType=VARCHAR},
@@ -196,18 +207,23 @@
       <if test="secondSigntime != null" >
         second_signtime = #{secondSigntime,jdbcType=VARCHAR},
       </if>
+      <if test="colormobi != null" >
+        colormobi = #{colormobi,jdbcType=VARCHAR},
+      </if>
       <if test="status != null" >
         status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="goodsPicture != null" >
+        goods_picture = #{goodsPicture,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.zlzkj.app.model.MakerGoods" >
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zlzkj.app.model.MakerGoods" >
     update x_goods
     set goods_id = #{goodsId,jdbcType=VARCHAR},
       goods_name = #{goodsName,jdbcType=VARCHAR},
-      goods_picture = #{goodsPicture,jdbcType=VARCHAR},
-      goods_price = #{goodsPrice,jdbcType=DOUBLE},
+      goods_price = #{goodsPrice,jdbcType=VARCHAR},
       goods_material = #{goodsMaterial,jdbcType=VARCHAR},
       goods_description = #{goodsDescription,jdbcType=VARCHAR},
       making_time = #{makingTime,jdbcType=VARCHAR},
@@ -218,6 +234,27 @@
       first_signtime = #{firstSigntime,jdbcType=VARCHAR},
       signature_two = #{signatureTwo,jdbcType=VARCHAR},
       second_signtime = #{secondSigntime,jdbcType=VARCHAR},
+      colormobi = #{colormobi,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      goods_picture = #{goodsPicture,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zlzkj.app.model.MakerGoods" >
+    update x_goods
+    set goods_id = #{goodsId,jdbcType=VARCHAR},
+      goods_name = #{goodsName,jdbcType=VARCHAR},
+      goods_price = #{goodsPrice,jdbcType=VARCHAR},
+      goods_material = #{goodsMaterial,jdbcType=VARCHAR},
+      goods_description = #{goodsDescription,jdbcType=VARCHAR},
+      making_time = #{makingTime,jdbcType=VARCHAR},
+      production_time = #{productionTime,jdbcType=VARCHAR},
+      production_area = #{productionArea,jdbcType=VARCHAR},
+      quality_guarantee = #{qualityGuarantee,jdbcType=VARCHAR},
+      signature_one = #{signatureOne,jdbcType=VARCHAR},
+      first_signtime = #{firstSigntime,jdbcType=VARCHAR},
+      signature_two = #{signatureTwo,jdbcType=VARCHAR},
+      second_signtime = #{secondSigntime,jdbcType=VARCHAR},
+      colormobi = #{colormobi,jdbcType=VARCHAR},
       status = #{status,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>

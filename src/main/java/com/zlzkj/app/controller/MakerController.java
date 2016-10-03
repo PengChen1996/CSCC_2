@@ -62,6 +62,6 @@ public class MakerController extends BaseController{
 		makerparts.setFirstSigntime(current_time);
 		makerparts.setStatus(0);
 		partsService.partsdata_entry(makerparts);
-		return "maker/partsdata_entry";
+		return null;
 	}
 }

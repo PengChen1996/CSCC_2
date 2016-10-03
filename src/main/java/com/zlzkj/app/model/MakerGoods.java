@@ -7,9 +7,7 @@ public class MakerGoods {
 
     private String goodsName;
 
-    private String goodsPicture;
-
-    private Double goodsPrice;
+    private String goodsPrice;
 
     private String goodsMaterial;
 
@@ -31,7 +29,11 @@ public class MakerGoods {
 
     private String secondSigntime;
 
+    private String colormobi;
+
     private Integer status;
+
+    private String goodsPicture;
 
     public Integer getId() {
         return id;
@@ -57,20 +59,12 @@ public class MakerGoods {
         this.goodsName = goodsName == null ? null : goodsName.trim();
     }
 
-    public String getGoodsPicture() {
-        return goodsPicture;
-    }
-
-    public void setGoodsPicture(String goodsPicture) {
-        this.goodsPicture = goodsPicture == null ? null : goodsPicture.trim();
-    }
-
-    public Double getGoodsPrice() {
+    public String getGoodsPrice() {
         return goodsPrice;
     }
 
-    public void setGoodsPrice(Double goodsPrice) {
-        this.goodsPrice = goodsPrice;
+    public void setGoodsPrice(String goodsPrice) {
+        this.goodsPrice = goodsPrice == null ? null : goodsPrice.trim();
     }
 
     public String getGoodsMaterial() {
@@ -153,11 +147,27 @@ public class MakerGoods {
         this.secondSigntime = secondSigntime == null ? null : secondSigntime.trim();
     }
 
+    public String getColormobi() {
+        return colormobi;
+    }
+
+    public void setColormobi(String colormobi) {
+        this.colormobi = colormobi == null ? null : colormobi.trim();
+    }
+
     public Integer getStatus() {
         return status;
     }
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getGoodsPicture() {
+        return goodsPicture;
+    }
+
+    public void setGoodsPicture(String goodsPicture) {
+        this.goodsPicture = goodsPicture == null ? null : goodsPicture.trim();
     }
 }
