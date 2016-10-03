@@ -13,25 +13,25 @@ public class MakerGoods {
 
     private String goodsDescription;
 
-    private String makingTime;
+    private String goodsMakingtime;
 
-    private String productionTime;
+    private String goodsProductiontime;
 
-    private String productionArea;
+    private String goodsProductionarea;
 
-    private String qualityGuarantee;
+    private String goodsQualityGuarantee;
 
-    private String signatureOne;
+    private String goodsSignatureOne;
 
-    private String firstSigntime;
+    private String goodsFirstSigntime;
 
-    private String signatureTwo;
+    private String goodsSignatureTwo;
 
-    private String secondSigntime;
+    private String goodsSecondSigntime;
 
     private String colormobi;
 
-    private Integer status;
+    private Integer goodsStatus;
 
     private String goodsPicture;
 
@@ -83,68 +83,68 @@ public class MakerGoods {
         this.goodsDescription = goodsDescription == null ? null : goodsDescription.trim();
     }
 
-    public String getMakingTime() {
-        return makingTime;
+    public String getGoodsMakingtime() {
+        return goodsMakingtime;
     }
 
-    public void setMakingTime(String makingTime) {
-        this.makingTime = makingTime == null ? null : makingTime.trim();
+    public void setGoodsMakingtime(String goodsMakingtime) {
+        this.goodsMakingtime = goodsMakingtime == null ? null : goodsMakingtime.trim();
     }
 
-    public String getProductionTime() {
-        return productionTime;
+    public String getGoodsProductiontime() {
+        return goodsProductiontime;
     }
 
-    public void setProductionTime(String productionTime) {
-        this.productionTime = productionTime == null ? null : productionTime.trim();
+    public void setGoodsProductiontime(String goodsProductiontime) {
+        this.goodsProductiontime = goodsProductiontime == null ? null : goodsProductiontime.trim();
     }
 
-    public String getProductionArea() {
-        return productionArea;
+    public String getGoodsProductionarea() {
+        return goodsProductionarea;
     }
 
-    public void setProductionArea(String productionArea) {
-        this.productionArea = productionArea == null ? null : productionArea.trim();
+    public void setGoodsProductionarea(String goodsProductionarea) {
+        this.goodsProductionarea = goodsProductionarea == null ? null : goodsProductionarea.trim();
     }
 
-    public String getQualityGuarantee() {
-        return qualityGuarantee;
+    public String getGoodsQualityGuarantee() {
+        return goodsQualityGuarantee;
     }
 
-    public void setQualityGuarantee(String qualityGuarantee) {
-        this.qualityGuarantee = qualityGuarantee == null ? null : qualityGuarantee.trim();
+    public void setGoodsQualityGuarantee(String goodsQualityGuarantee) {
+        this.goodsQualityGuarantee = goodsQualityGuarantee == null ? null : goodsQualityGuarantee.trim();
     }
 
-    public String getSignatureOne() {
-        return signatureOne;
+    public String getGoodsSignatureOne() {
+        return goodsSignatureOne;
     }
 
-    public void setSignatureOne(String signatureOne) {
-        this.signatureOne = signatureOne == null ? null : signatureOne.trim();
+    public void setGoodsSignatureOne(String goodsSignatureOne) {
+        this.goodsSignatureOne = goodsSignatureOne == null ? null : goodsSignatureOne.trim();
     }
 
-    public String getFirstSigntime() {
-        return firstSigntime;
+    public String getGoodsFirstSigntime() {
+        return goodsFirstSigntime;
     }
 
-    public void setFirstSigntime(String firstSigntime) {
-        this.firstSigntime = firstSigntime == null ? null : firstSigntime.trim();
+    public void setGoodsFirstSigntime(String goodsFirstSigntime) {
+        this.goodsFirstSigntime = goodsFirstSigntime == null ? null : goodsFirstSigntime.trim();
     }
 
-    public String getSignatureTwo() {
-        return signatureTwo;
+    public String getGoodsSignatureTwo() {
+        return goodsSignatureTwo;
     }
 
-    public void setSignatureTwo(String signatureTwo) {
-        this.signatureTwo = signatureTwo == null ? null : signatureTwo.trim();
+    public void setGoodsSignatureTwo(String goodsSignatureTwo) {
+        this.goodsSignatureTwo = goodsSignatureTwo == null ? null : goodsSignatureTwo.trim();
     }
 
-    public String getSecondSigntime() {
-        return secondSigntime;
+    public String getGoodsSecondSigntime() {
+        return goodsSecondSigntime;
     }
 
-    public void setSecondSigntime(String secondSigntime) {
-        this.secondSigntime = secondSigntime == null ? null : secondSigntime.trim();
+    public void setGoodsSecondSigntime(String goodsSecondSigntime) {
+        this.goodsSecondSigntime = goodsSecondSigntime == null ? null : goodsSecondSigntime.trim();
     }
 
     public String getColormobi() {
@@ -155,12 +155,12 @@ public class MakerGoods {
         this.colormobi = colormobi == null ? null : colormobi.trim();
     }
 
-    public Integer getStatus() {
-        return status;
+    public Integer getGoodsStatus() {
+        return goodsStatus;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setGoodsStatus(Integer goodsStatus) {
+        this.goodsStatus = goodsStatus;
     }
 
     public String getGoodsPicture() {

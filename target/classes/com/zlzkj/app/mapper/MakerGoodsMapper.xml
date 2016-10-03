@@ -8,24 +8,24 @@
     <result column="goods_price" property="goodsPrice" jdbcType="VARCHAR" />
     <result column="goods_material" property="goodsMaterial" jdbcType="VARCHAR" />
     <result column="goods_description" property="goodsDescription" jdbcType="VARCHAR" />
-    <result column="making_time" property="makingTime" jdbcType="VARCHAR" />
-    <result column="production_time" property="productionTime" jdbcType="VARCHAR" />
-    <result column="production_area" property="productionArea" jdbcType="VARCHAR" />
-    <result column="quality_guarantee" property="qualityGuarantee" jdbcType="VARCHAR" />
-    <result column="signature_one" property="signatureOne" jdbcType="VARCHAR" />
-    <result column="first_signtime" property="firstSigntime" jdbcType="VARCHAR" />
-    <result column="signature_two" property="signatureTwo" jdbcType="VARCHAR" />
-    <result column="second_signtime" property="secondSigntime" jdbcType="VARCHAR" />
+    <result column="goods_makingtime" property="goodsMakingtime" jdbcType="VARCHAR" />
+    <result column="goods_productiontime" property="goodsProductiontime" jdbcType="VARCHAR" />
+    <result column="goods_productionarea" property="goodsProductionarea" jdbcType="VARCHAR" />
+    <result column="goods_quality_guarantee" property="goodsQualityGuarantee" jdbcType="VARCHAR" />
+    <result column="goods_signature_one" property="goodsSignatureOne" jdbcType="VARCHAR" />
+    <result column="goods_first_signtime" property="goodsFirstSigntime" jdbcType="VARCHAR" />
+    <result column="goods_signature_two" property="goodsSignatureTwo" jdbcType="VARCHAR" />
+    <result column="goods_second_signtime" property="goodsSecondSigntime" jdbcType="VARCHAR" />
     <result column="colormobi" property="colormobi" jdbcType="VARCHAR" />
-    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="goods_status" property="goodsStatus" jdbcType="INTEGER" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.zlzkj.app.model.MakerGoods" extends="BaseResultMap" >
     <result column="goods_picture" property="goodsPicture" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, goods_id, goods_name, goods_price, goods_material, goods_description, making_time, 
-    production_time, production_area, quality_guarantee, signature_one, first_signtime, 
-    signature_two, second_signtime, colormobi, status
+    id, goods_id, goods_name, goods_price, goods_material, goods_description, goods_makingtime, 
+    goods_productiontime, goods_productionarea, goods_quality_guarantee, goods_signature_one, 
+    goods_first_signtime, goods_signature_two, goods_second_signtime, colormobi, goods_status
   </sql>
   <sql id="Blob_Column_List" >
     goods_picture
@@ -45,16 +45,18 @@
   <insert id="insert" parameterType="com.zlzkj.app.model.MakerGoods" >
     insert into x_goods (id, goods_id, goods_name, 
       goods_price, goods_material, goods_description, 
-      making_time, production_time, production_area, 
-      quality_guarantee, signature_one, first_signtime, 
-      signature_two, second_signtime, colormobi, 
-      status, goods_picture)
+      goods_makingtime, goods_productiontime, goods_productionarea, 
+      goods_quality_guarantee, goods_signature_one, 
+      goods_first_signtime, goods_signature_two, 
+      goods_second_signtime, colormobi, goods_status, 
+      goods_picture)
     values (#{id,jdbcType=INTEGER}, #{goodsId,jdbcType=VARCHAR}, #{goodsName,jdbcType=VARCHAR}, 
       #{goodsPrice,jdbcType=VARCHAR}, #{goodsMaterial,jdbcType=VARCHAR}, #{goodsDescription,jdbcType=VARCHAR}, 
-      #{makingTime,jdbcType=VARCHAR}, #{productionTime,jdbcType=VARCHAR}, #{productionArea,jdbcType=VARCHAR}, 
-      #{qualityGuarantee,jdbcType=VARCHAR}, #{signatureOne,jdbcType=VARCHAR}, #{firstSigntime,jdbcType=VARCHAR}, 
-      #{signatureTwo,jdbcType=VARCHAR}, #{secondSigntime,jdbcType=VARCHAR}, #{colormobi,jdbcType=VARCHAR}, 
-      #{status,jdbcType=INTEGER}, #{goodsPicture,jdbcType=LONGVARCHAR})
+      #{goodsMakingtime,jdbcType=VARCHAR}, #{goodsProductiontime,jdbcType=VARCHAR}, #{goodsProductionarea,jdbcType=VARCHAR}, 
+      #{goodsQualityGuarantee,jdbcType=VARCHAR}, #{goodsSignatureOne,jdbcType=VARCHAR}, 
+      #{goodsFirstSigntime,jdbcType=VARCHAR}, #{goodsSignatureTwo,jdbcType=VARCHAR}, 
+      #{goodsSecondSigntime,jdbcType=VARCHAR}, #{colormobi,jdbcType=VARCHAR}, #{goodsStatus,jdbcType=INTEGER}, 
+      #{goodsPicture,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.zlzkj.app.model.MakerGoods" >
     insert into x_goods
@@ -77,35 +79,35 @@
       <if test="goodsDescription != null" >
         goods_description,
       </if>
-      <if test="makingTime != null" >
-        making_time,
+      <if test="goodsMakingtime != null" >
+        goods_makingtime,
       </if>
-      <if test="productionTime != null" >
-        production_time,
+      <if test="goodsProductiontime != null" >
+        goods_productiontime,
       </if>
-      <if test="productionArea != null" >
-        production_area,
+      <if test="goodsProductionarea != null" >
+        goods_productionarea,
       </if>
-      <if test="qualityGuarantee != null" >
-        quality_guarantee,
+      <if test="goodsQualityGuarantee != null" >
+        goods_quality_guarantee,
       </if>
-      <if test="signatureOne != null" >
-        signature_one,
+      <if test="goodsSignatureOne != null" >
+        goods_signature_one,
       </if>
-      <if test="firstSigntime != null" >
-        first_signtime,
+      <if test="goodsFirstSigntime != null" >
+        goods_first_signtime,
       </if>
-      <if test="signatureTwo != null" >
-        signature_two,
+      <if test="goodsSignatureTwo != null" >
+        goods_signature_two,
       </if>
-      <if test="secondSigntime != null" >
-        second_signtime,
+      <if test="goodsSecondSigntime != null" >
+        goods_second_signtime,
       </if>
       <if test="colormobi != null" >
         colormobi,
       </if>
-      <if test="status != null" >
-        status,
+      <if test="goodsStatus != null" >
+        goods_status,
       </if>
       <if test="goodsPicture != null" >
         goods_picture,
@@ -130,35 +132,35 @@
       <if test="goodsDescription != null" >
         #{goodsDescription,jdbcType=VARCHAR},
       </if>
-      <if test="makingTime != null" >
-        #{makingTime,jdbcType=VARCHAR},
+      <if test="goodsMakingtime != null" >
+        #{goodsMakingtime,jdbcType=VARCHAR},
       </if>
-      <if test="productionTime != null" >
-        #{productionTime,jdbcType=VARCHAR},
+      <if test="goodsProductiontime != null" >
+        #{goodsProductiontime,jdbcType=VARCHAR},
       </if>
-      <if test="productionArea != null" >
-        #{productionArea,jdbcType=VARCHAR},
+      <if test="goodsProductionarea != null" >
+        #{goodsProductionarea,jdbcType=VARCHAR},
       </if>
-      <if test="qualityGuarantee != null" >
-        #{qualityGuarantee,jdbcType=VARCHAR},
+      <if test="goodsQualityGuarantee != null" >
+        #{goodsQualityGuarantee,jdbcType=VARCHAR},
       </if>
-      <if test="signatureOne != null" >
-        #{signatureOne,jdbcType=VARCHAR},
+      <if test="goodsSignatureOne != null" >
+        #{goodsSignatureOne,jdbcType=VARCHAR},
       </if>
-      <if test="firstSigntime != null" >
-        #{firstSigntime,jdbcType=VARCHAR},
+      <if test="goodsFirstSigntime != null" >
+        #{goodsFirstSigntime,jdbcType=VARCHAR},
       </if>
-      <if test="signatureTwo != null" >
-        #{signatureTwo,jdbcType=VARCHAR},
+      <if test="goodsSignatureTwo != null" >
+        #{goodsSignatureTwo,jdbcType=VARCHAR},
       </if>
-      <if test="secondSigntime != null" >
-        #{secondSigntime,jdbcType=VARCHAR},
+      <if test="goodsSecondSigntime != null" >
+        #{goodsSecondSigntime,jdbcType=VARCHAR},
       </if>
       <if test="colormobi != null" >
         #{colormobi,jdbcType=VARCHAR},
       </if>
-      <if test="status != null" >
-        #{status,jdbcType=INTEGER},
+      <if test="goodsStatus != null" >
+        #{goodsStatus,jdbcType=INTEGER},
       </if>
       <if test="goodsPicture != null" >
         #{goodsPicture,jdbcType=LONGVARCHAR},
@@ -183,35 +185,35 @@
       <if test="goodsDescription != null" >
         goods_description = #{goodsDescription,jdbcType=VARCHAR},
       </if>
-      <if test="makingTime != null" >
-        making_time = #{makingTime,jdbcType=VARCHAR},
+      <if test="goodsMakingtime != null" >
+        goods_makingtime = #{goodsMakingtime,jdbcType=VARCHAR},
       </if>
-      <if test="productionTime != null" >
-        production_time = #{productionTime,jdbcType=VARCHAR},
+      <if test="goodsProductiontime != null" >
+        goods_productiontime = #{goodsProductiontime,jdbcType=VARCHAR},
       </if>
-      <if test="productionArea != null" >
-        production_area = #{productionArea,jdbcType=VARCHAR},
+      <if test="goodsProductionarea != null" >
+        goods_productionarea = #{goodsProductionarea,jdbcType=VARCHAR},
       </if>
-      <if test="qualityGuarantee != null" >
-        quality_guarantee = #{qualityGuarantee,jdbcType=VARCHAR},
+      <if test="goodsQualityGuarantee != null" >
+        goods_quality_guarantee = #{goodsQualityGuarantee,jdbcType=VARCHAR},
       </if>
-      <if test="signatureOne != null" >
-        signature_one = #{signatureOne,jdbcType=VARCHAR},
+      <if test="goodsSignatureOne != null" >
+        goods_signature_one = #{goodsSignatureOne,jdbcType=VARCHAR},
       </if>
-      <if test="firstSigntime != null" >
-        first_signtime = #{firstSigntime,jdbcType=VARCHAR},
+      <if test="goodsFirstSigntime != null" >
+        goods_first_signtime = #{goodsFirstSigntime,jdbcType=VARCHAR},
       </if>
-      <if test="signatureTwo != null" >
-        signature_two = #{signatureTwo,jdbcType=VARCHAR},
+      <if test="goodsSignatureTwo != null" >
+        goods_signature_two = #{goodsSignatureTwo,jdbcType=VARCHAR},
       </if>
-      <if test="secondSigntime != null" >
-        second_signtime = #{secondSigntime,jdbcType=VARCHAR},
+      <if test="goodsSecondSigntime != null" >
+        goods_second_signtime = #{goodsSecondSigntime,jdbcType=VARCHAR},
       </if>
       <if test="colormobi != null" >
         colormobi = #{colormobi,jdbcType=VARCHAR},
       </if>
-      <if test="status != null" >
-        status = #{status,jdbcType=INTEGER},
+      <if test="goodsStatus != null" >
+        goods_status = #{goodsStatus,jdbcType=INTEGER},
       </if>
       <if test="goodsPicture != null" >
         goods_picture = #{goodsPicture,jdbcType=LONGVARCHAR},
@@ -226,16 +228,16 @@
       goods_price = #{goodsPrice,jdbcType=VARCHAR},
       goods_material = #{goodsMaterial,jdbcType=VARCHAR},
       goods_description = #{goodsDescription,jdbcType=VARCHAR},
-      making_time = #{makingTime,jdbcType=VARCHAR},
-      production_time = #{productionTime,jdbcType=VARCHAR},
-      production_area = #{productionArea,jdbcType=VARCHAR},
-      quality_guarantee = #{qualityGuarantee,jdbcType=VARCHAR},
-      signature_one = #{signatureOne,jdbcType=VARCHAR},
-      first_signtime = #{firstSigntime,jdbcType=VARCHAR},
-      signature_two = #{signatureTwo,jdbcType=VARCHAR},
-      second_signtime = #{secondSigntime,jdbcType=VARCHAR},
+      goods_makingtime = #{goodsMakingtime,jdbcType=VARCHAR},
+      goods_productiontime = #{goodsProductiontime,jdbcType=VARCHAR},
+      goods_productionarea = #{goodsProductionarea,jdbcType=VARCHAR},
+      goods_quality_guarantee = #{goodsQualityGuarantee,jdbcType=VARCHAR},
+      goods_signature_one = #{goodsSignatureOne,jdbcType=VARCHAR},
+      goods_first_signtime = #{goodsFirstSigntime,jdbcType=VARCHAR},
+      goods_signature_two = #{goodsSignatureTwo,jdbcType=VARCHAR},
+      goods_second_signtime = #{goodsSecondSigntime,jdbcType=VARCHAR},
       colormobi = #{colormobi,jdbcType=VARCHAR},
-      status = #{status,jdbcType=INTEGER},
+      goods_status = #{goodsStatus,jdbcType=INTEGER},
       goods_picture = #{goodsPicture,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -246,16 +248,16 @@
       goods_price = #{goodsPrice,jdbcType=VARCHAR},
       goods_material = #{goodsMaterial,jdbcType=VARCHAR},
       goods_description = #{goodsDescription,jdbcType=VARCHAR},
-      making_time = #{makingTime,jdbcType=VARCHAR},
-      production_time = #{productionTime,jdbcType=VARCHAR},
-      production_area = #{productionArea,jdbcType=VARCHAR},
-      quality_guarantee = #{qualityGuarantee,jdbcType=VARCHAR},
-      signature_one = #{signatureOne,jdbcType=VARCHAR},
-      first_signtime = #{firstSigntime,jdbcType=VARCHAR},
-      signature_two = #{signatureTwo,jdbcType=VARCHAR},
-      second_signtime = #{secondSigntime,jdbcType=VARCHAR},
+      goods_makingtime = #{goodsMakingtime,jdbcType=VARCHAR},
+      goods_productiontime = #{goodsProductiontime,jdbcType=VARCHAR},
+      goods_productionarea = #{goodsProductionarea,jdbcType=VARCHAR},
+      goods_quality_guarantee = #{goodsQualityGuarantee,jdbcType=VARCHAR},
+      goods_signature_one = #{goodsSignatureOne,jdbcType=VARCHAR},
+      goods_first_signtime = #{goodsFirstSigntime,jdbcType=VARCHAR},
+      goods_signature_two = #{goodsSignatureTwo,jdbcType=VARCHAR},
+      goods_second_signtime = #{goodsSecondSigntime,jdbcType=VARCHAR},
       colormobi = #{colormobi,jdbcType=VARCHAR},
-      status = #{status,jdbcType=INTEGER}
+      goods_status = #{goodsStatus,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

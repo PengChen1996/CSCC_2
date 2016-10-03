@@ -13,5 +13,7 @@ public interface MakerPartsMapper {
 
     int updateByPrimaryKeySelective(MakerParts record);
 
+    int updateByPrimaryKeyWithBLOBs(MakerParts record);
+
     int updateByPrimaryKey(MakerParts record);
 }

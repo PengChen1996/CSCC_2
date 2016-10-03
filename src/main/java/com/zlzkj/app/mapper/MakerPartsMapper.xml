@@ -5,24 +5,32 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="parts_id" property="partsId" jdbcType="VARCHAR" />
     <result column="parts_name" property="partsName" jdbcType="VARCHAR" />
-    <result column="parts_picture" property="partsPicture" jdbcType="VARCHAR" />
-    <result column="parts_decsription" property="partsDecsription" jdbcType="VARCHAR" />
-    <result column="production_time" property="productionTime" jdbcType="VARCHAR" />
-    <result column="production_area" property="productionArea" jdbcType="VARCHAR" />
-    <result column="belongs" property="belongs" jdbcType="VARCHAR" />
-    <result column="signature_one" property="signatureOne" jdbcType="VARCHAR" />
-    <result column="first_signtime" property="firstSigntime" jdbcType="VARCHAR" />
-    <result column="signature_two" property="signatureTwo" jdbcType="VARCHAR" />
-    <result column="second_signtime" property="secondSigntime" jdbcType="VARCHAR" />
-    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="parts_description" property="partsDescription" jdbcType="VARCHAR" />
+    <result column="parts_productiontime" property="partsProductiontime" jdbcType="VARCHAR" />
+    <result column="parts_productionarea" property="partsProductionarea" jdbcType="VARCHAR" />
+    <result column="parts_belongs" property="partsBelongs" jdbcType="VARCHAR" />
+    <result column="parts_signature_one" property="partsSignatureOne" jdbcType="VARCHAR" />
+    <result column="parts_first_signtime" property="partsFirstSigntime" jdbcType="VARCHAR" />
+    <result column="parts_signature_two" property="partsSignatureTwo" jdbcType="VARCHAR" />
+    <result column="parts_second_signtime" property="partsSecondSigntime" jdbcType="VARCHAR" />
+    <result column="parts_status" property="partsStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zlzkj.app.model.MakerParts" extends="BaseResultMap" >
+    <result column="parts_picture" property="partsPicture" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, parts_id, parts_name, parts_picture, parts_decsription, production_time, production_area, 
-    belongs, signature_one, first_signtime, signature_two, second_signtime, status
+    id, parts_id, parts_name, parts_description, parts_productiontime, parts_productionarea, 
+    parts_belongs, parts_signature_one, parts_first_signtime, parts_signature_two, parts_second_signtime, 
+    parts_status
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <sql id="Blob_Column_List" >
+    parts_picture
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
     from x_parts
     where id = #{id,jdbcType=INTEGER}
   </select>
@@ -32,15 +40,17 @@
   </delete>
   <insert id="insert" parameterType="com.zlzkj.app.model.MakerParts" >
     insert into x_parts (id, parts_id, parts_name, 
-      parts_picture, parts_decsription, production_time, 
-      production_area, belongs, signature_one, 
-      first_signtime, signature_two, second_signtime, 
-      status)
+      parts_description, parts_productiontime, 
+      parts_productionarea, parts_belongs, parts_signature_one, 
+      parts_first_signtime, parts_signature_two, 
+      parts_second_signtime, parts_status, parts_picture
+      )
     values (#{id,jdbcType=INTEGER}, #{partsId,jdbcType=VARCHAR}, #{partsName,jdbcType=VARCHAR}, 
-      #{partsPicture,jdbcType=VARCHAR}, #{partsDecsription,jdbcType=VARCHAR}, #{productionTime,jdbcType=VARCHAR}, 
-      #{productionArea,jdbcType=VARCHAR}, #{belongs,jdbcType=VARCHAR}, #{signatureOne,jdbcType=VARCHAR}, 
-      #{firstSigntime,jdbcType=VARCHAR}, #{signatureTwo,jdbcType=VARCHAR}, #{secondSigntime,jdbcType=VARCHAR}, 
-      #{status,jdbcType=INTEGER})
+      #{partsDescription,jdbcType=VARCHAR}, #{partsProductiontime,jdbcType=VARCHAR}, 
+      #{partsProductionarea,jdbcType=VARCHAR}, #{partsBelongs,jdbcType=VARCHAR}, #{partsSignatureOne,jdbcType=VARCHAR}, 
+      #{partsFirstSigntime,jdbcType=VARCHAR}, #{partsSignatureTwo,jdbcType=VARCHAR}, 
+      #{partsSecondSigntime,jdbcType=VARCHAR}, #{partsStatus,jdbcType=INTEGER}, #{partsPicture,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.zlzkj.app.model.MakerParts" >
     insert into x_parts
@@ -54,35 +64,35 @@
       <if test="partsName != null" >
         parts_name,
       </if>
+      <if test="partsDescription != null" >
+        parts_description,
+      </if>
+      <if test="partsProductiontime != null" >
+        parts_productiontime,
+      </if>
+      <if test="partsProductionarea != null" >
+        parts_productionarea,
+      </if>
+      <if test="partsBelongs != null" >
+        parts_belongs,
+      </if>
+      <if test="partsSignatureOne != null" >
+        parts_signature_one,
+      </if>
+      <if test="partsFirstSigntime != null" >
+        parts_first_signtime,
+      </if>
+      <if test="partsSignatureTwo != null" >
+        parts_signature_two,
+      </if>
+      <if test="partsSecondSigntime != null" >
+        parts_second_signtime,
+      </if>
+      <if test="partsStatus != null" >
+        parts_status,
+      </if>
       <if test="partsPicture != null" >
         parts_picture,
-      </if>
-      <if test="partsDecsription != null" >
-        parts_decsription,
-      </if>
-      <if test="productionTime != null" >
-        production_time,
-      </if>
-      <if test="productionArea != null" >
-        production_area,
-      </if>
-      <if test="belongs != null" >
-        belongs,
-      </if>
-      <if test="signatureOne != null" >
-        signature_one,
-      </if>
-      <if test="firstSigntime != null" >
-        first_signtime,
-      </if>
-      <if test="signatureTwo != null" >
-        signature_two,
-      </if>
-      <if test="secondSigntime != null" >
-        second_signtime,
-      </if>
-      <if test="status != null" >
-        status,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -95,35 +105,35 @@
       <if test="partsName != null" >
         #{partsName,jdbcType=VARCHAR},
       </if>
+      <if test="partsDescription != null" >
+        #{partsDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="partsProductiontime != null" >
+        #{partsProductiontime,jdbcType=VARCHAR},
+      </if>
+      <if test="partsProductionarea != null" >
+        #{partsProductionarea,jdbcType=VARCHAR},
+      </if>
+      <if test="partsBelongs != null" >
+        #{partsBelongs,jdbcType=VARCHAR},
+      </if>
+      <if test="partsSignatureOne != null" >
+        #{partsSignatureOne,jdbcType=VARCHAR},
+      </if>
+      <if test="partsFirstSigntime != null" >
+        #{partsFirstSigntime,jdbcType=VARCHAR},
+      </if>
+      <if test="partsSignatureTwo != null" >
+        #{partsSignatureTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="partsSecondSigntime != null" >
+        #{partsSecondSigntime,jdbcType=VARCHAR},
+      </if>
+      <if test="partsStatus != null" >
+        #{partsStatus,jdbcType=INTEGER},
+      </if>
       <if test="partsPicture != null" >
-        #{partsPicture,jdbcType=VARCHAR},
-      </if>
-      <if test="partsDecsription != null" >
-        #{partsDecsription,jdbcType=VARCHAR},
-      </if>
-      <if test="productionTime != null" >
-        #{productionTime,jdbcType=VARCHAR},
-      </if>
-      <if test="productionArea != null" >
-        #{productionArea,jdbcType=VARCHAR},
-      </if>
-      <if test="belongs != null" >
-        #{belongs,jdbcType=VARCHAR},
-      </if>
-      <if test="signatureOne != null" >
-        #{signatureOne,jdbcType=VARCHAR},
-      </if>
-      <if test="firstSigntime != null" >
-        #{firstSigntime,jdbcType=VARCHAR},
-      </if>
-      <if test="signatureTwo != null" >
-        #{signatureTwo,jdbcType=VARCHAR},
-      </if>
-      <if test="secondSigntime != null" >
-        #{secondSigntime,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null" >
-        #{status,jdbcType=INTEGER},
+        #{partsPicture,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -136,53 +146,68 @@
       <if test="partsName != null" >
         parts_name = #{partsName,jdbcType=VARCHAR},
       </if>
+      <if test="partsDescription != null" >
+        parts_description = #{partsDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="partsProductiontime != null" >
+        parts_productiontime = #{partsProductiontime,jdbcType=VARCHAR},
+      </if>
+      <if test="partsProductionarea != null" >
+        parts_productionarea = #{partsProductionarea,jdbcType=VARCHAR},
+      </if>
+      <if test="partsBelongs != null" >
+        parts_belongs = #{partsBelongs,jdbcType=VARCHAR},
+      </if>
+      <if test="partsSignatureOne != null" >
+        parts_signature_one = #{partsSignatureOne,jdbcType=VARCHAR},
+      </if>
+      <if test="partsFirstSigntime != null" >
+        parts_first_signtime = #{partsFirstSigntime,jdbcType=VARCHAR},
+      </if>
+      <if test="partsSignatureTwo != null" >
+        parts_signature_two = #{partsSignatureTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="partsSecondSigntime != null" >
+        parts_second_signtime = #{partsSecondSigntime,jdbcType=VARCHAR},
+      </if>
+      <if test="partsStatus != null" >
+        parts_status = #{partsStatus,jdbcType=INTEGER},
+      </if>
       <if test="partsPicture != null" >
-        parts_picture = #{partsPicture,jdbcType=VARCHAR},
-      </if>
-      <if test="partsDecsription != null" >
-        parts_decsription = #{partsDecsription,jdbcType=VARCHAR},
-      </if>
-      <if test="productionTime != null" >
-        production_time = #{productionTime,jdbcType=VARCHAR},
-      </if>
-      <if test="productionArea != null" >
-        production_area = #{productionArea,jdbcType=VARCHAR},
-      </if>
-      <if test="belongs != null" >
-        belongs = #{belongs,jdbcType=VARCHAR},
-      </if>
-      <if test="signatureOne != null" >
-        signature_one = #{signatureOne,jdbcType=VARCHAR},
-      </if>
-      <if test="firstSigntime != null" >
-        first_signtime = #{firstSigntime,jdbcType=VARCHAR},
-      </if>
-      <if test="signatureTwo != null" >
-        signature_two = #{signatureTwo,jdbcType=VARCHAR},
-      </if>
-      <if test="secondSigntime != null" >
-        second_signtime = #{secondSigntime,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null" >
-        status = #{status,jdbcType=INTEGER},
+        parts_picture = #{partsPicture,jdbcType=LONGVARCHAR},
       </if>
     </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zlzkj.app.model.MakerParts" >
+    update x_parts
+    set parts_id = #{partsId,jdbcType=VARCHAR},
+      parts_name = #{partsName,jdbcType=VARCHAR},
+      parts_description = #{partsDescription,jdbcType=VARCHAR},
+      parts_productiontime = #{partsProductiontime,jdbcType=VARCHAR},
+      parts_productionarea = #{partsProductionarea,jdbcType=VARCHAR},
+      parts_belongs = #{partsBelongs,jdbcType=VARCHAR},
+      parts_signature_one = #{partsSignatureOne,jdbcType=VARCHAR},
+      parts_first_signtime = #{partsFirstSigntime,jdbcType=VARCHAR},
+      parts_signature_two = #{partsSignatureTwo,jdbcType=VARCHAR},
+      parts_second_signtime = #{partsSecondSigntime,jdbcType=VARCHAR},
+      parts_status = #{partsStatus,jdbcType=INTEGER},
+      parts_picture = #{partsPicture,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zlzkj.app.model.MakerParts" >
     update x_parts
     set parts_id = #{partsId,jdbcType=VARCHAR},
       parts_name = #{partsName,jdbcType=VARCHAR},
-      parts_picture = #{partsPicture,jdbcType=VARCHAR},
-      parts_decsription = #{partsDecsription,jdbcType=VARCHAR},
-      production_time = #{productionTime,jdbcType=VARCHAR},
-      production_area = #{productionArea,jdbcType=VARCHAR},
-      belongs = #{belongs,jdbcType=VARCHAR},
-      signature_one = #{signatureOne,jdbcType=VARCHAR},
-      first_signtime = #{firstSigntime,jdbcType=VARCHAR},
-      signature_two = #{signatureTwo,jdbcType=VARCHAR},
-      second_signtime = #{secondSigntime,jdbcType=VARCHAR},
-      status = #{status,jdbcType=INTEGER}
+      parts_description = #{partsDescription,jdbcType=VARCHAR},
+      parts_productiontime = #{partsProductiontime,jdbcType=VARCHAR},
+      parts_productionarea = #{partsProductionarea,jdbcType=VARCHAR},
+      parts_belongs = #{partsBelongs,jdbcType=VARCHAR},
+      parts_signature_one = #{partsSignatureOne,jdbcType=VARCHAR},
+      parts_first_signtime = #{partsFirstSigntime,jdbcType=VARCHAR},
+      parts_signature_two = #{partsSignatureTwo,jdbcType=VARCHAR},
+      parts_second_signtime = #{partsSecondSigntime,jdbcType=VARCHAR},
+      parts_status = #{partsStatus,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

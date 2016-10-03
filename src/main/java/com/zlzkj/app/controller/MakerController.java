@@ -36,11 +36,11 @@ public class MakerController extends BaseController{
 		System.out.println("maker/goodsdata_entry");
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String current_time = df.format(new Date());
-		makergoods.setSignatureOne("Flying");
-		makergoods.setFirstSigntime(current_time);
-		makergoods.setStatus(0);
+		makergoods.setGoodsSignatureOne("Flying");
+		makergoods.setGoodsFirstSigntime(current_time);
+		makergoods.setGoodsStatus(0);
 		goodsService.goodsdata_entry(makergoods);
-		return "maker/goodsdata_entry";
+		return null;
 	}
 	/*录入部件信息*/
 	@RequestMapping(value={"maker/partsdata_entry_page"})
@@ -58,9 +58,9 @@ public class MakerController extends BaseController{
 //		makerparts.setProductionArea(ip+"--"+address);
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String current_time = df.format(new Date());
-		makerparts.setSignatureOne("Flying");
-		makerparts.setFirstSigntime(current_time);
-		makerparts.setStatus(0);
+		makerparts.setPartsSignatureOne("Flying");
+		makerparts.setPartsFirstSigntime(current_time);
+		makerparts.setPartsStatus(0);
 		partsService.partsdata_entry(makerparts);
 		return null;
 	}

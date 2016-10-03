@@ -26,10 +26,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="${__static__}/bootstrap3/css/bootstrap.min.css" type="text/css">
   	<script type="text/javascript" src="${__static__}/bootstrap3/js/bootstrap.min.js"></script>
   	<script type="text/javascript">
+  		function entry_goods(){
+  			$.ajax({
+  				url:"maker/goodsdata_entry",
+  				data:$("#form_goods").serialize(),
+  				type:"post",
+  				success:function(){
+  					alert("success");
+  				},
+  				error:function(){
+  					alert("error");
+  				}
+  			});
+  		}
   		function entry_parts(){
+  			var parts = {
+  				partsId:$("#parts_id").val(),
+  				partsName:$("#parts_name").val(),
+  				partsPicture:$("#parts_picture").val(),
+  				partsDescription:$("#parts_description").val(),
+  				partsProductiontime:$("#parts_production_time").val(),
+  				partsProductionarea:$("#parts_production_area").val(),
+  				partsBelongs:$("#parts_belongs").val(),
+  			}
 	  		$.ajax({
 	  			url:"maker/partsdata_entry",
-  				data:$("#form_parts").serialize(),
+  				data:parts,
   				type:"post",
   				success:function(){
   					alert("success!");
@@ -54,10 +76,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	<div class="container-fluid">
   		<br>
   		<div class="row">
-  		<div class="col-sm-6">
-		    <form class="form-horizontal" action="maker/goodsdata_entry" method="post" enctype="multipart/form-data">
+	    <form class="form-horizontal" id="form_goods" method="post" enctype="multipart/form-data">
+	    	<div class="col-sm-4">
 		    	<div class="form-group">
-		    		<label class="col-sm-4 control-label">产品图片</label>
+		    		<label class="col-sm-4 control-label"><!-- 产品图片 --></label>
 				    <div class="col-sm-8">
 					    <div class="goodspic">
 				   		<img alt="图片" src="${__static__}/cropbox/001.jpg" class="img-rounded" style="width:270px;height:200px;">
@@ -67,104 +89,134 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</button>
 					</div>
 			  	</div>
-		    	<div class="form-group">
-				    <label class="col-sm-4 control-label">产品图片</label>
-				    <div class="col-sm-8">
+	    	</div>
+	    	<div class="col-sm-8">
+	    		<div class="form-group" style="display:none;">
+				    <label class="col-sm-1 control-label">产品图片</label>
+				    <div class="col-sm-7">
 				    	<input type="text" class="form-control" id="goods_picture" name="goodsPicture" placeholder="产品图片">
 				    </div>
 			  	</div>
 		    	<div class="form-group">
-				    <label class="col-sm-4 control-label">产品编号</label>
-				    <div class="col-sm-8">
-				    	<input type="text" class="form-control" id="goods_id" name="goodsId" placeholder="产品编号">
+				    <label class="col-sm-1 control-label">产品编号</label>
+				    <div class="col-sm-7">
+				    	<input type="text" class="form-control" id="goods_id" name="goodsId" placeholder="产品编号" readonly>
 				    </div>
 			  	</div>
 		    	<div class="form-group">
-				    <label class="col-sm-4 control-label">产品名称</label>
-				    <div class="col-sm-8">
+				    <label class="col-sm-1 control-label">产品名称</label>
+				    <div class="col-sm-7">
 				    	<input type="text" class="form-control" name="goodsName" placeholder="产品名称">
 				    </div>
 			  	</div>
 			  	<div class="form-group">
-				    <label class="col-sm-4 control-label">产品价格</label>
-				    <div class="col-sm-8">
+				    <label class="col-sm-1 control-label">产品价格</label>
+				    <div class="col-sm-7">
 				    	<input type="text" class="form-control" name="goodsPrice" placeholder="产品名称">
 				    </div>
 			  	</div>
 			  	<div class="form-group">
-				    <label class="col-sm-4 control-label">保质期</label>
-				    <div class="col-sm-8">
-				    	<input type="text" class="form-control" name="qualityGuarantee" placeholder="产品名称">
+				    <label class="col-sm-1 control-label">保质期</label>
+				    <div class="col-sm-7">
+				    	<input type="text" class="form-control" name="goodsQualityGuarantee" placeholder="产品名称">
 				    </div>
 			  	</div>
 			  	<div class="form-group">
-				    <label class="col-sm-4 control-label">生产时间</label>
-				    <div class="col-sm-8">
-				    	<input type="text" class="form-control" id="goodsdate" name="productionTime" placeholder="生产时间">
+				    <label class="col-sm-1 control-label">生产时间</label>
+				    <div class="col-sm-7">
+				    	<input type="text" class="form-control" id="goodsdate" name="goodsProductiontime" placeholder="生产时间" readonly>
 				    </div>
 			  	</div>
 			  	<div class="form-group">
-				    <label class="col-sm-4 control-label">生产地点</label>
-				    <div class="col-sm-8">
-				    	<input type="text" class="form-control" name="productionArea" placeholder="生产地点">
+				    <label class="col-sm-1 control-label">生产地点</label>
+				    <div class="col-sm-7">
+				    	<input type="text" class="form-control" name="goodsProductionarea" placeholder="生产地点">
 				    </div>
 			  	</div>
 			  	<div class="form-group">
-				    <label class="col-sm-4 control-label">产品构成</label>
-				    <div class="col-sm-8">
-				    	<input type="text" class="form-control" id="goods_material" name="goodsMaterial" placeholder="产品构成">
+				    <label class="col-sm-1 control-label">产品构成</label>
+				    <div class="col-sm-6">
+				    	<input type="text" class="form-control" id="goods_material" name="goodsMaterial" placeholder="产品构成" readonly>
+				    </div>
+				    <div class="col-sm-1">
+				    	<button type="button" id="addparts" class="btn btn-info" title="添加部件">+</button>
 				    </div>
 			  	</div>
 			  	<div class="form-group">
-				    <label class="col-sm-4 control-label">产品描述</label>
-				    <div class="col-sm-8">
-				    	<textarea class="form-control" name="goodsDescription" rows="5"></textarea>
+				    <label class="col-sm-1 control-label"><!-- 产品构成 --></label>
+				    <div class="col-sm-7">
+				    	<div id="parts_entry" class="thumbnail" style="display:none;">
+				    		<div class="form-group">
+					    		<label class="col-sm-3 control-label">部件编号：</label>
+					    		<div class="col-sm-9">
+							    	<input type="text" class="form-control" id="parts_id" name="partsId" placeholder="部件编号" readonly>
+							    </div>
+						    </div>
+						    <div class="form-group">
+							    <label class="col-sm-3 control-label">部件名称：</label>
+					    		<div class="col-sm-9">
+							    	<input type="text" class="form-control" id="parts_name" name="partsName" placeholder="部件名称">
+							    </div>
+						    </div>
+						    <div class="form-group">
+							    <label class="col-sm-3 control-label">部件图片：</label>
+					    		<div class="col-sm-9">
+							    	<input type="text" class="form-control" id="parts_picture" name="partsPicture" placeholder="部件图片">
+							    </div>
+							</div>
+						    <div class="form-group">
+							    <label class="col-sm-3 control-label">生产日期：</label>
+					    		<div class="col-sm-9">
+							    	<input type="text" class="form-control" id="parts_production_time" name="partsProductiontime" placeholder="生产日期" readonly>
+							    </div>
+						    </div>
+						    <div class="form-group">
+							    <label class="col-sm-3 control-label">生产厂商：</label>
+					    		<div class="col-sm-9">
+							    	<input type="text" class="form-control" id="parts_production_area" name="partsProductionarea" placeholder="生产厂商">
+							    </div>
+							</div>
+							<div class="form-group">
+							    <label class="col-sm-3 control-label">部件描述：</label>
+					    		<div class="col-sm-9">
+					    			<textarea class="form-control" id="parts_description" name="partsDescription" placeholder="部件描述" rows="5"></textarea>
+							    </div>
+						    </div>
+							<div class="form-group" style="display:none">
+							    <label class="col-sm-3 control-label">属	于：</label>
+					    		<div class="col-sm-9">
+							    	<input type="text" class="form-control" id="parts_belongs" name="partsBelongs" readonly>
+							    </div>
+						    </div>
+						    <div class="form-group">
+							    <label class="col-sm-3 control-label"><!-- 提交 --></label>
+							    <div class="col-sm-9">
+							    	<!-- <input type="text" class="form-control" id="parts_belongs" name="belongs" placeholder="部件编号"> -->
+							    	<button type="button" onclick="entry_parts()" class="btn btn-info">提交</button>
+							    </div>
+					    	</div>
+					    	<!-- 签名1：<input type="text" name="signatureOne"><br>
+					    	签名时间1：<input type="text" name="firstSigntime"><br>
+					    	签名2：<input type="text" name="signatureTwo"><br>
+					    	签名时间2：<input type="text" name="secondSigntime"><br> -->
+					    </div>
 				    </div>
 			  	</div>
-			  	 <div class="form-group">
-				    <div class="col-sm-offset-4 col-sm-8">
-				      <button type="submit" class="btn btn-default">提交</button>
+			  	<div class="form-group">
+				    <label class="col-sm-1 control-label">产品描述</label>
+				    <div class="col-sm-7">
+				    	<textarea class="form-control" name="goodsDescription" rows="5" placeholder="部件描述"></textarea>
 				    </div>
 			  	</div>
-			  	<%-- 产品编号：<input type="text"  name="goodsId"><br>
-		    	产品名称：<input type="text" name="goodsName"><br>
-		    	产品图片：<input type="text" id="goods_picture" name="goodsPicture"><br>
-		    	<div class="goodspic">
-		   		<img alt="图片" src="${__static__}/cropbox/001.jpg" class="img-rounded" style="width:270px;height:200px;">
-			   	</div>
-			   	<button type="button" data-toggle="modal" data-target="#goodsModal">
-					上传图片
-				</button>
-				<br>
-		    	产品价格：<input type="text" name="goodsPrice"><br>
-		    	产品构成：<input type="text" id="goods_material" name="goodsMaterial"><br>
-		    	产品描述：<input type="text" name="goodsDescription"><br>
-		    	<!-- 制作时间：<input type="text" name="makingTime"><br> -->
-		    	生产时间：<input type="text" name="productionTime" id="goodsdate"><br>
-		    	生产地点：<input type="text" name="productionArea"><br>
-		    	保质期：<input type="text" name="qualityGuarantee"><br>
-		    	<input type="submit" value="提交"> --%>
-		    </form>
-	    </div>
-	    </div>
-    </div>
-    <input type="button" id="addparts" value="添加">
-    <hr>
-    <div id="parts_entry" style="display:none;">
-	    <form id="form_parts" method="post" enctype="multipart/form-data">
-	    	部件编号：<input type="text" id="parts_id" name="partsId"><br>
-	    	部件名称：<input type="text" name="partsName"><br>
-	    	部件图片：<input type="text" name="partsPicture"><br>
-	    	部件描述：<input type="text" name="partsDecsription"><br>
-	    	生产时间：<input type="text" name="productionTime" id="partsdate"><br>
-	    	生产地点：<input type="text" name="productionArea"><br>
-	    	属	于：<input type="text" id="parts_belongs" name="belongs"><br>
-	    	<!-- 签名1：<input type="text" name="signatureOne"><br>
-	    	签名时间1：<input type="text" name="firstSigntime"><br>
-	    	签名2：<input type="text" name="signatureTwo"><br>
-	    	签名时间2：<input type="text" name="secondSigntime"><br> -->
-	    	<input type="button" onclick="entry_parts()" value="提交">
+			  	<div class="form-group">
+				    <div class="col-sm-offset-1 col-sm-7">
+				      <button type="button" onclick="entry_goods()" class="btn btn-primary">提交</button>
+				    </div>
+			  	</div>
+	    	</div>
 	    </form>
+	    </div>
+	    <br>
     </div>
     <script type="text/javascript">
     	$(document).ready(function(){
@@ -199,7 +251,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    minDate:"2014-09-19 00:00:00"
 			});
 			jeDate({
-			    dateCell:"#partsdate",
+			    dateCell:"#parts_production_time",
 			    skinCell:"jedateblue",
 			    format:"YYYY-MM-DD hh:mm",
 			    isinitVal:true,

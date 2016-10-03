@@ -7,25 +7,25 @@ public class MakerParts {
 
     private String partsName;
 
+    private String partsDescription;
+
+    private String partsProductiontime;
+
+    private String partsProductionarea;
+
+    private String partsBelongs;
+
+    private String partsSignatureOne;
+
+    private String partsFirstSigntime;
+
+    private String partsSignatureTwo;
+
+    private String partsSecondSigntime;
+
+    private Integer partsStatus;
+
     private String partsPicture;
-
-    private String partsDecsription;
-
-    private String productionTime;
-
-    private String productionArea;
-
-    private String belongs;
-
-    private String signatureOne;
-
-    private String firstSigntime;
-
-    private String signatureTwo;
-
-    private String secondSigntime;
-
-    private Integer status;
 
     public Integer getId() {
         return id;
@@ -51,83 +51,83 @@ public class MakerParts {
         this.partsName = partsName == null ? null : partsName.trim();
     }
 
+    public String getPartsDescription() {
+        return partsDescription;
+    }
+
+    public void setPartsDescription(String partsDescription) {
+        this.partsDescription = partsDescription == null ? null : partsDescription.trim();
+    }
+
+    public String getPartsProductiontime() {
+        return partsProductiontime;
+    }
+
+    public void setPartsProductiontime(String partsProductiontime) {
+        this.partsProductiontime = partsProductiontime == null ? null : partsProductiontime.trim();
+    }
+
+    public String getPartsProductionarea() {
+        return partsProductionarea;
+    }
+
+    public void setPartsProductionarea(String partsProductionarea) {
+        this.partsProductionarea = partsProductionarea == null ? null : partsProductionarea.trim();
+    }
+
+    public String getPartsBelongs() {
+        return partsBelongs;
+    }
+
+    public void setPartsBelongs(String partsBelongs) {
+        this.partsBelongs = partsBelongs == null ? null : partsBelongs.trim();
+    }
+
+    public String getPartsSignatureOne() {
+        return partsSignatureOne;
+    }
+
+    public void setPartsSignatureOne(String partsSignatureOne) {
+        this.partsSignatureOne = partsSignatureOne == null ? null : partsSignatureOne.trim();
+    }
+
+    public String getPartsFirstSigntime() {
+        return partsFirstSigntime;
+    }
+
+    public void setPartsFirstSigntime(String partsFirstSigntime) {
+        this.partsFirstSigntime = partsFirstSigntime == null ? null : partsFirstSigntime.trim();
+    }
+
+    public String getPartsSignatureTwo() {
+        return partsSignatureTwo;
+    }
+
+    public void setPartsSignatureTwo(String partsSignatureTwo) {
+        this.partsSignatureTwo = partsSignatureTwo == null ? null : partsSignatureTwo.trim();
+    }
+
+    public String getPartsSecondSigntime() {
+        return partsSecondSigntime;
+    }
+
+    public void setPartsSecondSigntime(String partsSecondSigntime) {
+        this.partsSecondSigntime = partsSecondSigntime == null ? null : partsSecondSigntime.trim();
+    }
+
+    public Integer getPartsStatus() {
+        return partsStatus;
+    }
+
+    public void setPartsStatus(Integer partsStatus) {
+        this.partsStatus = partsStatus;
+    }
+
     public String getPartsPicture() {
         return partsPicture;
     }
 
     public void setPartsPicture(String partsPicture) {
         this.partsPicture = partsPicture == null ? null : partsPicture.trim();
-    }
-
-    public String getPartsDecsription() {
-        return partsDecsription;
-    }
-
-    public void setPartsDecsription(String partsDecsription) {
-        this.partsDecsription = partsDecsription == null ? null : partsDecsription.trim();
-    }
-
-    public String getProductionTime() {
-        return productionTime;
-    }
-
-    public void setProductionTime(String productionTime) {
-        this.productionTime = productionTime == null ? null : productionTime.trim();
-    }
-
-    public String getProductionArea() {
-        return productionArea;
-    }
-
-    public void setProductionArea(String productionArea) {
-        this.productionArea = productionArea == null ? null : productionArea.trim();
-    }
-
-    public String getBelongs() {
-        return belongs;
-    }
-
-    public void setBelongs(String belongs) {
-        this.belongs = belongs == null ? null : belongs.trim();
-    }
-
-    public String getSignatureOne() {
-        return signatureOne;
-    }
-
-    public void setSignatureOne(String signatureOne) {
-        this.signatureOne = signatureOne == null ? null : signatureOne.trim();
-    }
-
-    public String getFirstSigntime() {
-        return firstSigntime;
-    }
-
-    public void setFirstSigntime(String firstSigntime) {
-        this.firstSigntime = firstSigntime == null ? null : firstSigntime.trim();
-    }
-
-    public String getSignatureTwo() {
-        return signatureTwo;
-    }
-
-    public void setSignatureTwo(String signatureTwo) {
-        this.signatureTwo = signatureTwo == null ? null : signatureTwo.trim();
-    }
-
-    public String getSecondSigntime() {
-        return secondSigntime;
-    }
-
-    public void setSecondSigntime(String secondSigntime) {
-        this.secondSigntime = secondSigntime == null ? null : secondSigntime.trim();
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
     }
 }
