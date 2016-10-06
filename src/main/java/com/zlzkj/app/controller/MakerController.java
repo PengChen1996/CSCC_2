@@ -64,4 +64,10 @@ public class MakerController extends BaseController{
 		partsService.partsdata_entry(makerparts);
 		return null;
 	}
+	/*批量录入商品*/
+	@RequestMapping(value={"maker/volumedata_entry_page"})
+	public String volumedata_entry_page() {
+		System.out.println("maker/volumedata_entry_page");
+		return "maker/volumedata_entry";
+	}
 }

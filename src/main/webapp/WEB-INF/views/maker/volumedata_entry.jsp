@@ -26,13 +26,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="${__static__}/bootstrap3/css/bootstrap.min.css" type="text/css">
   	<script type="text/javascript" src="${__static__}/bootstrap3/js/bootstrap.min.js"></script>
   	<script type="text/javascript">
+  		function volume(){
+  			$("#volume_model").modal("hide");
+  			entry_goods();
+  			var volume_num = $("#volume_num").val()-1;
+  			for(var i=0;i<volume_num;i++){
+  				var goods_num = "";
+	    		for(var j=0;j<18;j++){
+	    			goods_num += parseInt(Math.random()*9.9);
+	    		}
+	    		$("#goods_id").val("#G"+goods_num);
+    			$("#parts_belongs").val("#G"+goods_num);
+  				entry_goods();
+  			}
+  			alert("success！");
+  		}
   		function entry_goods(){
   			$.ajax({
   				url:"maker/goodsdata_entry",
   				data:$("#form_goods").serialize(),
   				type:"post",
   				success:function(){
-  					alert("success");
+  					/* alert("success"); */ 
   				},
   				error:function(){
   					alert("error");
@@ -210,7 +225,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			  	</div>
 			  	<div class="form-group">
 				    <div class="col-sm-offset-1 col-sm-7">
-				      <button type="button" onclick="entry_goods()" class="btn btn-primary">提交</button>
+				    	<!-- <button type="button" class="btn btn-primary" onclick="entry_goods()">提交</button> -->
+				    	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#volume_model">批量</button>
 				    </div>
 			  	</div>
 	    	</div>
@@ -218,6 +234,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    </div>
 	    <br>
     </div>
+    <!-- 输入批量数目模态框 -->
+    <div class="modal fade bs-example-modal-sm" id="volume_model" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-sm">
+	    <div class="modal-content">
+			<div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			  <h4 class="modal-title">输入批量数目</h4>
+			</div>
+			<div class="modal-body">
+	        	<input type="text" id="volume_num" class="form-control" placeholder="请输入批量数目">
+	        </div>
+	        <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+		        <button type="button" class="btn btn-primary" onclick="volume()">确定</button>
+		    </div>
+	    </div>
+	  </div>
+	</div>
     <script type="text/javascript">
     	$(document).ready(function(){
     		$("#addparts").click(function(){
