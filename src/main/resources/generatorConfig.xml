@@ -49,7 +49,7 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 		
-		<table tableName="x_parts" domainObjectName="MakerParts"
+		<table tableName="x_goods" domainObjectName="MakerGoods"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false"></table>

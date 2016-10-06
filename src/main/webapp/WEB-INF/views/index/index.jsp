@@ -20,9 +20,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-	<script type="text/javascript" src="${__static__}/bootstrap3/js/jquery2.1.4.min.js"></script> 
-	<link rel="stylesheet" href="${__static__}/bootstrap3/css/bootstrap.min.css" type="text/css">
-  	<script type="text/javascript" src="${__static__}/bootstrap3/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="${__static__}/bootstrap3/js/jquery2.1.4.js"></script> 
+	<link rel="stylesheet" href="${__static__}/bootstrap3/css/bootstrap.css" type="text/css">
+  	<script type="text/javascript" src="${__static__}/bootstrap3/js/bootstrap.js"></script>
   </head>
   
   <body style="background: #dadada;">
@@ -68,7 +69,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
         </div>
     </nav>
-    <div class="container">
+    <div class="container" id="content">
    		首页
     </div>
   </body>

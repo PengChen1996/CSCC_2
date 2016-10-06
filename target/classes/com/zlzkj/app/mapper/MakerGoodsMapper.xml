@@ -17,6 +17,7 @@
     <result column="goods_signature_two" property="goodsSignatureTwo" jdbcType="VARCHAR" />
     <result column="goods_second_signtime" property="goodsSecondSigntime" jdbcType="VARCHAR" />
     <result column="colormobi" property="colormobi" jdbcType="VARCHAR" />
+    <result column="goods_url" property="goodsUrl" jdbcType="VARCHAR" />
     <result column="goods_status" property="goodsStatus" jdbcType="INTEGER" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.zlzkj.app.model.MakerGoods" extends="BaseResultMap" >
@@ -25,7 +26,8 @@
   <sql id="Base_Column_List" >
     id, goods_id, goods_name, goods_price, goods_material, goods_description, goods_makingtime, 
     goods_productiontime, goods_productionarea, goods_quality_guarantee, goods_signature_one, 
-    goods_first_signtime, goods_signature_two, goods_second_signtime, colormobi, goods_status
+    goods_first_signtime, goods_signature_two, goods_second_signtime, colormobi, goods_url, 
+    goods_status
   </sql>
   <sql id="Blob_Column_List" >
     goods_picture
@@ -48,15 +50,15 @@
       goods_makingtime, goods_productiontime, goods_productionarea, 
       goods_quality_guarantee, goods_signature_one, 
       goods_first_signtime, goods_signature_two, 
-      goods_second_signtime, colormobi, goods_status, 
-      goods_picture)
+      goods_second_signtime, colormobi, goods_url, 
+      goods_status, goods_picture)
     values (#{id,jdbcType=INTEGER}, #{goodsId,jdbcType=VARCHAR}, #{goodsName,jdbcType=VARCHAR}, 
       #{goodsPrice,jdbcType=VARCHAR}, #{goodsMaterial,jdbcType=VARCHAR}, #{goodsDescription,jdbcType=VARCHAR}, 
       #{goodsMakingtime,jdbcType=VARCHAR}, #{goodsProductiontime,jdbcType=VARCHAR}, #{goodsProductionarea,jdbcType=VARCHAR}, 
       #{goodsQualityGuarantee,jdbcType=VARCHAR}, #{goodsSignatureOne,jdbcType=VARCHAR}, 
       #{goodsFirstSigntime,jdbcType=VARCHAR}, #{goodsSignatureTwo,jdbcType=VARCHAR}, 
-      #{goodsSecondSigntime,jdbcType=VARCHAR}, #{colormobi,jdbcType=VARCHAR}, #{goodsStatus,jdbcType=INTEGER}, 
-      #{goodsPicture,jdbcType=LONGVARCHAR})
+      #{goodsSecondSigntime,jdbcType=VARCHAR}, #{colormobi,jdbcType=VARCHAR}, #{goodsUrl,jdbcType=VARCHAR}, 
+      #{goodsStatus,jdbcType=INTEGER}, #{goodsPicture,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.zlzkj.app.model.MakerGoods" >
     insert into x_goods
@@ -105,6 +107,9 @@
       </if>
       <if test="colormobi != null" >
         colormobi,
+      </if>
+      <if test="goodsUrl != null" >
+        goods_url,
       </if>
       <if test="goodsStatus != null" >
         goods_status,
@@ -159,6 +164,9 @@
       <if test="colormobi != null" >
         #{colormobi,jdbcType=VARCHAR},
       </if>
+      <if test="goodsUrl != null" >
+        #{goodsUrl,jdbcType=VARCHAR},
+      </if>
       <if test="goodsStatus != null" >
         #{goodsStatus,jdbcType=INTEGER},
       </if>
@@ -212,6 +220,9 @@
       <if test="colormobi != null" >
         colormobi = #{colormobi,jdbcType=VARCHAR},
       </if>
+      <if test="goodsUrl != null" >
+        goods_url = #{goodsUrl,jdbcType=VARCHAR},
+      </if>
       <if test="goodsStatus != null" >
         goods_status = #{goodsStatus,jdbcType=INTEGER},
       </if>
@@ -237,6 +248,7 @@
       goods_signature_two = #{goodsSignatureTwo,jdbcType=VARCHAR},
       goods_second_signtime = #{goodsSecondSigntime,jdbcType=VARCHAR},
       colormobi = #{colormobi,jdbcType=VARCHAR},
+      goods_url = #{goodsUrl,jdbcType=VARCHAR},
       goods_status = #{goodsStatus,jdbcType=INTEGER},
       goods_picture = #{goodsPicture,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
@@ -257,6 +269,7 @@
       goods_signature_two = #{goodsSignatureTwo,jdbcType=VARCHAR},
       goods_second_signtime = #{goodsSecondSigntime,jdbcType=VARCHAR},
       colormobi = #{colormobi,jdbcType=VARCHAR},
+      goods_url = #{goodsUrl,jdbcType=VARCHAR},
       goods_status = #{goodsStatus,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>

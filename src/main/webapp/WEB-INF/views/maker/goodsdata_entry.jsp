@@ -3,7 +3,6 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -22,9 +21,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link type="text/css" rel="stylesheet" href="${__static__}/jedate/skin/jedate.css">
 	<script type="text/javascript" src="${__static__}/jedate/jedate.js"></script>
 	<link rel="stylesheet" href="${__static__}/cropbox/cropimg.css" type="text/css" />
-	<script type="text/javascript" src="${__static__}/bootstrap3/js/jquery2.1.4.min.js"></script> 
-	<link rel="stylesheet" href="${__static__}/bootstrap3/css/bootstrap.min.css" type="text/css">
-  	<script type="text/javascript" src="${__static__}/bootstrap3/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${__static__}/bootstrap3/js/jquery2.1.4.js"></script> 
+	<link rel="stylesheet" href="${__static__}/bootstrap3/css/bootstrap.css" type="text/css">
+  	<script type="text/javascript" src="${__static__}/bootstrap3/js/bootstrap.js"></script>
   	<script type="text/javascript">
   		function entry_goods(){
   			$.ajax({

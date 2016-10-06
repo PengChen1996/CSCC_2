@@ -31,6 +31,8 @@ public class MakerGoods {
 
     private String colormobi;
 
+    private String goodsUrl;
+
     private Integer goodsStatus;
 
     private String goodsPicture;
@@ -153,6 +155,14 @@ public class MakerGoods {
 
     public void setColormobi(String colormobi) {
         this.colormobi = colormobi == null ? null : colormobi.trim();
+    }
+
+    public String getGoodsUrl() {
+        return goodsUrl;
+    }
+
+    public void setGoodsUrl(String goodsUrl) {
+        this.goodsUrl = goodsUrl == null ? null : goodsUrl.trim();
     }
 
     public Integer getGoodsStatus() {
