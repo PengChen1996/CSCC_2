@@ -30,7 +30,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				url:"maker/goodsdata_entry",
   				data:$("#form_goods").serialize(),
   				type:"post",
-  				success:function(){
+  				success:function(data){
+  					//alert(data);
+  					var img = "<img src="+data+" style='width:270px;height:270px;'>";
+  					$("#colormobi_div").html(img);
   					alert("success");
   				},
   				error:function(){
@@ -87,6 +90,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							上传图片
 						</button>
 					</div>
+			  	</div>
+			  	<div class="form-group">
+			  		<label class="col-sm-4 control-label"></label>
+			  		<div class="col-sm-8" id="colormobi_div">
+			  			1
+			  		</div>
 			  	</div>
 	    	</div>
 	    	<div class="col-sm-8">

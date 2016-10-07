@@ -20,6 +20,7 @@ import com.zlzkj.app.model.MakerParts;
 import com.zlzkj.app.service.MakerGoodsService;
 import com.zlzkj.app.service.MakerPartsService;
 import com.zlzkj.app.service.SearchGoodsService;
+import com.zlzkj.app.util.createImg;
 import com.zlzkj.core.base.BaseController;
 import com.zlzkj.core.sql.Row;
 
@@ -40,14 +41,33 @@ public class MakerController extends BaseController{
 	}
 	@RequestMapping(value={"maker/goodsdata_entry"})
 	public String goodsdata_entry(Model model,HttpServletRequest request,HttpServletResponse response,
-			MakerGoods makergoods) {
+			MakerGoods makergoods) throws IOException {
 		System.out.println("maker/goodsdata_entry");
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String current_time = df.format(new Date());
 		makergoods.setGoodsSignatureOne("Flying");
 		makergoods.setGoodsFirstSigntime(current_time);
 		makergoods.setGoodsStatus(0);
+		/*保存url到数据库*/
+		String goods_id = makergoods.getGoodsId();
+		String img_name = goods_id.split("#")[1];
+		System.out.println(img_name);
+		String colormobi = "http://localhost:8080/CSCC_2/static/color_img/%23"+img_name+".jpg";
+		makergoods.setColormobi(colormobi);
+		/*保存图片到tomcat*/
+		String path = request.getRealPath("/static/color_img");
+		String savePath = path+"/"+goods_id+".jpg";//保存路径
+//		System.out.println(savePath);
+		/*生成彩码*/
+		createImg cg = new createImg();
+		cg.graphicsGeneration(goods_id, savePath);
 		goodsService.goodsdata_entry(makergoods);
+		
+		PrintWriter out = response.getWriter();  
+//		JSONObject jo = new JSONObject();
+//		jo.put("colormobi_url",colormobi);
+//		out.write(jo.toString());
+		out.write(colormobi);
 		return null;
 	}
 	/*录入部件信息*/
