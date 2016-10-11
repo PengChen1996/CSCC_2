@@ -32,6 +32,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				type:"post",
   				success:function(data){
   					//alert(data);
+  					var goods_num = "";
+  					for(var i=0;i<18;i++){
+		 				goods_num += parseInt(Math.random()*9.9);   		
+		    		}
+		    		$("#goods_id").val("#G"+goods_num);
+		    		$("#parts_belongs").val("#G"+goods_num);
   					var img = "<img src="+data+" style='width:270px;height:270px;'>";
   					$("#colormobi_div").html(img);
   					alert("success");
@@ -73,11 +79,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  		});
   		}
   	</script>
+  	
   </head>
   <body>
+  	<%@ include file="../index/base.jsp" %><!-- 导航条 -->
+	<script type="text/javascript">
+		$("#colormobi_generate").addClass("active");
+	</script>
   	<div class="container-fluid">
-  		<br>
-  		<div class="row">
+  		<div class="row" style="margin-left:20px;">
 	    <form class="form-horizontal" id="form_goods" method="post" enctype="multipart/form-data">
 	    	<div class="col-sm-4">
 		    	<div class="form-group">

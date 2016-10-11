@@ -30,17 +30,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				goodsId:$("#goodsId").val()
   			};
   			$.ajax({
-  				url:"maker/search_data",
+  				url:"${z:u('maker/search_data')}",
   				data:goods_id,
   				type:"post",
   				success:function(data){
   					var json_data = JSON.parse(data);
   					if(json_data.goods!=""||json_data.parts!=""){
+  						var goods_info = "";
 	  					$.each(json_data.goods,function(index,item){
-	  						$("#content").html(item.goods_id);
+	  						goods_info = item.goods_id+"<br><img src="+item.goods_picture+" style='width:270px;'>";
+	  						goods_info += "<img src="+item.colormobi+" style='width:200px;'>";
+	  						$("#goods_content").html(goods_info);
 	  					});
 	  					$.each(json_data.parts,function(index,item){
-	  						$("#content").append("<br>"+item.parts_id);
+	  						$("#parts_content").append("<br>"+item.parts_id);
 	  					});
   					}
   					else{
@@ -56,14 +59,43 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-  	<%-- ${z:u('maker/goodsdata_entry')}
-    This is my JSP page. <br> --%>
-            产品编号： <input type="text" id="goodsId" name="goodsId">
-           <input type="button" onclick="search_data()" value="查询"><br>
-           
-    <div id="content">
-		1    
+    <%@ include file="../index/base.jsp" %><!-- 导航条 -->
+    <script>
+    	$("#search_data").addClass("active");
+    </script>
+    <div class="container">
+    	<div class="row">
+    		<div class="col-sm-12">
+    			<div class="col-sm-6">
+    				<input type="text" class="form-control" id="goodsId" name="goodsId" placeholder="彩码查询">
+    			</div>
+    			<button type="button" class="btn btn-default" onclick="search_data()">彩码查询</button>
+    		</div>
+    	</div>
     </div>
+    <br>
+    <!-- 查询内容 -->
+    <div class="container">
+    	<div class="row">
+    		<div class="col-sm-12">
+    			<label class="col-sm-12 control-label">产品信息：</label>
+	    		<div id="goods_content">
+					产品    
+		    	</div>
+    		</div>
+    	</div>
+    </div>
+    <div class="container">
+    	<div class="row">
+    		<div class="col-sm-12">
+    			<label class="col-sm-12 control-label">部件信息：</label>
+	    		<div id="parts_content">
+					部件   
+		    	</div>
+    		</div>
+    	</div>
+    </div>
+
     <%-- <c:forEach var="goods" items="${goods}">
     	${goods.goods_id }
     	${goods.goods_name }

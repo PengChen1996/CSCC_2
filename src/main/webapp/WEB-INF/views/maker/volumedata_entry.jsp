@@ -88,9 +88,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	</script>
   </head>
   <body>
+  	<%@ include file="../index/base.jsp" %><!-- 导航条 -->
+  	<script type="text/javascript">
+  		$("#change_text").html("彩码批量<span class='caret'></span>");
+  		$("#colormobi_generate").addClass("active");
+  	</script>
   	<div class="container-fluid">
-  		<br>
-  		<div class="row">
+  		<div class="row" style="margin-left:20px;">
 	    <form class="form-horizontal" id="form_goods" method="post" enctype="multipart/form-data">
 	    	<div class="col-sm-4">
 		    	<div class="form-group">
