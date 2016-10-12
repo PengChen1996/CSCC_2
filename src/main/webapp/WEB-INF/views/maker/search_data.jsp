@@ -47,7 +47,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  					});
   					}
   					else{
-  						$("#content").html("未查询到数据！！！");
+  						$("#goods_content").html("未查询到数据！！！");
   					}
   				},
   				error:function(){
@@ -56,6 +56,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   			});
   		}
   	</script>
+  	
   </head>
   
   <body>
@@ -74,14 +75,46 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	</div>
     </div>
     <br>
+    <div class="container">
+    	<div class="row">
+    		<div class="col-sm-12">
+    			<div class="col-sm-12">
+	    			<span style="width:80px;height:28px;background:#eee;display:block;text-align:center;line-height:28px;">
+	    				查询结果
+	    			</span>
+	    			<label style="margin-top:-24px;margin-left:90px;">查询结果仅供参考，以实际商品信息为准。</label>
+	    			<div style="border-bottom:1px solid #eee"></div>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+    <br>
     <!-- 查询内容 -->
     <div class="container">
     	<div class="row">
     		<div class="col-sm-12">
     			<label class="col-sm-12 control-label">产品信息：</label>
-	    		<div id="goods_content">
-					产品    
-		    	</div>
+	    		<div class="col-sm-12">
+					<div id="goods_content" style="background:#eee">
+				 		<div class="media">
+						  <a class="media-left" href="#">
+						    <img src="${__static__}/cropbox/001.jpg" style="width:270px;height:200px;">
+						  </a>
+						  <div class="media-body">
+						    <h5 class="media-heading">产品名称:彩码</h5>
+						    <h5 class="media-heading">产品价格：1000</h5>
+						    <h5 class="media-heading">保质期：122</h5>
+						    <h5 class="media-heading">生产日期：2016</h5>
+						    <h5 class="media-heading">生产厂商：杭电</h5>
+					    	描述：
+					    	<p style="height:60px;word-wrap: break-word;overflow: hidden;">
+						    	Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+								Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.						  
+						  	</p>
+						  </div>
+						</div>
+	    			</div>
+				</div> 
     		</div>
     	</div>
     </div>
@@ -89,13 +122,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<div class="row">
     		<div class="col-sm-12">
     			<label class="col-sm-12 control-label">部件信息：</label>
-	    		<div id="parts_content">
-					部件   
-		    	</div>
+	    		<div class="col-sm-12">
+					<div id="parts_content">
+				 		暂无介绍
+	    			</div>
+				</div> 
     		</div>
     	</div>
-    </div>
-
+    </div>  
     <%-- <c:forEach var="goods" items="${goods}">
     	${goods.goods_id }
     	${goods.goods_name }
