@@ -37,13 +37,40 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   					var json_data = JSON.parse(data);
   					if(json_data.goods!=""||json_data.parts!=""){
   						var goods_info = "";
+  						var parts_info = "";
+  						$("#parts_content").html("");
 	  					$.each(json_data.goods,function(index,item){
-	  						goods_info = item.goods_id+"<br><img src="+item.goods_picture+" style='width:270px;'>";
-	  						goods_info += "<img src="+item.colormobi+" style='width:200px;'>";
+	  						goods_info = "<div class='media'>"+
+											  "<a class='media-left' href='#'>"+
+											    "<img src='"+item.goods_picture+"' style='width:270px;height:200px;'>"+
+											  "</a>"+
+											  "<div class='media-body'>"+
+											    "<label>产品名称:</label>"+item.goods_name+
+											    "<br><label>产品价格:</label>"+item.goods_price+
+											    "<br><label>保质期:</label>"+item.goods_makingtime+
+											    "<br><label>生产日期:</label>"+item.goods_productiontime+
+											    "<br><label>生产厂商:</label>"+item.goods_productionarea+
+											    "<br><label>描述：</label>"+
+											    "<p style='height:40px;word-wrap: break-word;overflow: hidden;'>"+item.goods_description+"</p>"+
+											  "</div>"+
+											"</div>";
 	  						$("#goods_content").html(goods_info);
 	  					});
 	  					$.each(json_data.parts,function(index,item){
-	  						$("#parts_content").append("<br>"+item.parts_id);
+	  						parts_info = "<div class='media'>"+
+											  "<a class='media-left' href='#'>"+
+											    "<img src='${__static__}/cropbox/001.jpg' style='width:270px;height:200px;'>"+
+											  "</a>"+
+											  "<div class='media-body'>"+
+											    "<label>产品名称:</label>"+item.parts_name+
+											    "<br><label>生产日期:</label>"+item.parts_productiontime+
+											    "<br><label>生产厂商:</label>"+item.parts_productionarea+
+											    "<br><label>描述：</label>"+
+											    "<p style='height:40px;word-wrap: break-word;overflow: hidden;'>"+item.parts_description+"</p>"+
+											  "</div>"+
+											"</div>"+
+											"<div class='col-sm-12' style='border-bottom:1px solid #ccc'></div>";
+	  						$("#parts_content").append(parts_info);
 	  					});
   					}
   					else{
@@ -64,6 +91,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script>
     	$("#search_data").addClass("active");
     </script>
+    
     <div class="container">
     	<div class="row">
     		<div class="col-sm-12">
@@ -123,7 +151,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		<div class="col-sm-12">
     			<label class="col-sm-12 control-label">部件信息：</label>
 	    		<div class="col-sm-12">
-					<div id="parts_content">
+					<div id="parts_content" style="background:#eee">
 				 		暂无介绍
 	    			</div>
 				</div> 
