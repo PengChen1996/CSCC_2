@@ -9,7 +9,7 @@ public class MD5String {
 	/** 
 	 * MD5 加密 
 	 */  
-	public static String getMD5Str(String str) {  
+	public String getMD5Str(String str) {  
 		MessageDigest messageDigest = null;  
 
 		try {  

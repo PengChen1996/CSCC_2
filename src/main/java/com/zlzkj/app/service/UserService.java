@@ -20,10 +20,11 @@ public class UserService {
 	@Autowired
 	private SqlRunner sqlRunner;
 
-	public int userdata_entry(User user){
+	//注册
+	public int register(User user){
 		return mapper.insertSelective(user);
 	}
-	
+	//登录
 	public boolean login(String account,String password,int status){
 		String sql = "select * from x_user where account='"+account+"' and password='"+password+"' and status="+status+"";
 		List<Row> list = sqlRunner.select(sql);

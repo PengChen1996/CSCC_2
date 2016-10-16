@@ -19,20 +19,23 @@ public class UserController extends BaseController{
 	private UserService userService;
 	
 	//注册
-	@RequestMapping(value={"user/userdata_entry_page"})
+	@RequestMapping(value={"user/register_page"})
 	public String data_entry_page() {
-		System.out.println("user/userdata_entry_page");
-		return "user/userdata_entry";
+		System.out.println("user/register_page");
+		return "user/register";
 	}
-	@RequestMapping(value={"user/userdata_entry"})
+	@RequestMapping(value={"user/register"})
 	public String data_entry(Model model,HttpServletRequest request,HttpServletResponse response,
 			User user) {
-		System.out.println("user/userdata_entry");
-		System.out.println(user.getAccount());
-		user.getAccount();
-		user.setPassword("111111");
-		userService.userdata_entry(user);
-		return "user/userdata_entry";
+		System.out.println("user/register");
+		
+		String password = user.getPassword();
+		//MD5加密
+		MD5String md5 = new MD5String();
+		user.setPassword(md5.getMD5Str(password));
+		
+		userService.register(user);
+		return "user/register";
 	}
 	//登录
 	@RequestMapping(value={"user/login_page"})
@@ -44,11 +47,13 @@ public class UserController extends BaseController{
 	public String login(Model model,HttpServletRequest request,HttpServletResponse response,
 			User user) {
 		System.out.println("user/login");
-		user.getAccount();
-		user.getPassword();
-//		MD5String md5 = new MD5String();
-//		System.out.println(md5.getMD5Str("22"));
-		boolean islogin = userService.login(user.getAccount(),user.getPassword(),0);
+		
+		String account = user.getAccount();
+		MD5String md5 = new MD5String();
+		String password = md5.getMD5Str(user.getPassword());
+
+		System.out.println("密码："+password);
+		boolean islogin = userService.login(account,password,0);
 		System.out.println(islogin);
 		if(islogin){
 			return "index/index";

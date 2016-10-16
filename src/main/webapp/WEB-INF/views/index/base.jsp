@@ -69,7 +69,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </ul>
                     <span class="pull-right">
                     <a type="button" class="btn btn-default navbar-btn" href="${z:u('user/login_page')}"><!--Sign in-->登录</a>
-                    <a type="button" class="btn btn-success navbar-btn" href="${z:u('user/login_page')}"><!--sign up-->注册</a>
+                    <a type="button" class="btn btn-success navbar-btn" href="${z:u('user/register_page')}"><!--sign up-->注册</a>
                 </span>
             </div>
         </div>
