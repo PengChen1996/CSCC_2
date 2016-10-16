@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.zlzkj.app.model.User;
 import com.zlzkj.app.service.UserService;
+import com.zlzkj.app.util.MD5String;
 import com.zlzkj.core.base.BaseController;
 
 @Controller
@@ -45,7 +46,14 @@ public class UserController extends BaseController{
 		System.out.println("user/login");
 		user.getAccount();
 		user.getPassword();
-		userService.login(user.getAccount(),user.getPassword(),0);
-		return "user/login";
+//		MD5String md5 = new MD5String();
+//		System.out.println(md5.getMD5Str("22"));
+		boolean islogin = userService.login(user.getAccount(),user.getPassword(),0);
+		System.out.println(islogin);
+		if(islogin){
+			return "index/index";
+		}else{
+			return "user/login";
+		}
 	}
 }

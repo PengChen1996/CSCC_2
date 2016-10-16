@@ -68,8 +68,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <li><a href="#">客户端下载</a></li>
                 </ul>
                     <span class="pull-right">
-                    <button type="button" class="btn btn-default navbar-btn"><!--Sign in-->登录</button>
-                    <button type="button" class="btn btn-success navbar-btn"><!--sign up-->注册</button>
+                    <a type="button" class="btn btn-default navbar-btn" href="${z:u('user/login_page')}"><!--Sign in-->登录</a>
+                    <a type="button" class="btn btn-success navbar-btn" href="${z:u('user/login_page')}"><!--sign up-->注册</a>
                 </span>
             </div>
         </div>
