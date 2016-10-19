@@ -1,5 +1,7 @@
 package com.zlzkj.app.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,6 +14,7 @@ import com.zlzkj.app.model.User;
 import com.zlzkj.app.service.UserService;
 import com.zlzkj.app.util.MD5String;
 import com.zlzkj.core.base.BaseController;
+import com.zlzkj.core.sql.Row;
 
 @Controller
 public class UserController extends BaseController{
@@ -34,6 +37,9 @@ public class UserController extends BaseController{
 		MD5String md5 = new MD5String();
 		user.setPassword(md5.getMD5Str(password));
 		
+		user.setPicture("../static/img/001.jpg");
+		user.setRole(0);
+		user.setStatus(0);
 		userService.register(user);
 		return "user/register";
 	}
@@ -55,7 +61,15 @@ public class UserController extends BaseController{
 		System.out.println("密码："+password);
 		boolean islogin = userService.login(account,password,0);
 		System.out.println(islogin);
+		
+		List<Row> list = userService.select_one(account);
+		Row row = new Row();
+		row.put("account", account);
+		list.add(0,row);
+		System.out.println(list);
+		
 		if(islogin){
+			request.getSession().setAttribute("user_info",list);
 			return "index/index";
 		}else{
 			return "user/login";

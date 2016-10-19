@@ -11,8 +11,6 @@ public class User {
 
     private String name;
 
-    private Integer picture;
-
     private String gender;
 
     private String birth;
@@ -28,6 +26,8 @@ public class User {
     private Integer role;
 
     private Integer status;
+
+    private String picture;
 
     public Integer getId() {
         return id;
@@ -67,14 +67,6 @@ public class User {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
-    }
-
-    public Integer getPicture() {
-        return picture;
-    }
-
-    public void setPicture(Integer picture) {
-        this.picture = picture;
     }
 
     public String getGender() {
@@ -139,5 +131,13 @@ public class User {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture == null ? null : picture.trim();
     }
 }

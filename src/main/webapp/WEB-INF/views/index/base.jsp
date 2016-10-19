@@ -67,13 +67,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <li><a href="#">关于彩码</a></li>
                     <li><a href="#">客户端下载</a></li>
                 </ul>
-                    <span class="pull-right">
-                    <a type="button" class="btn btn-default navbar-btn" href="${z:u('user/login_page')}"><!--Sign in-->登录</a>
-                    <a type="button" class="btn btn-success navbar-btn" href="${z:u('user/register_page')}"><!--sign up-->注册</a>
+                <span class="pull-right">
+	                <c:if test="${empty sessionScope.user_info[1].role}"> 
+					    <a type="button" class="btn btn-default navbar-btn" href="${z:u('user/login_page')}"><!--Sign in-->登录</a>
+                    	<a type="button" class="btn btn-success navbar-btn" href="${z:u('user/register_page')}"><!--sign up-->注册</a>
+					</c:if> 
+                    <c:if test="${not empty sessionScope.user_info[1].role}"> 
+						<div class="dropdown" style="margin-top:10px;">
+						  <img src="${__static__ }/${sessionScope.user_info[1].picture }" style="width:30px;height:30px;">
+						  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+						    ${sessionScope.user_info[0].account }
+						    <span class="caret"></span>
+						  </button>
+						  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+						    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">个人中心</a></li>
+						    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">设置</a></li>
+						    <li role="presentation"><a role="menuitem" tabindex="-1" href="${z:u('user/login_page')}">退出</a></li>
+						  </ul>
+						</div>
+					</c:if> 
                 </span>
             </div>
         </div>
     </nav>
+   <%--  ${sessionScope.user_info[0].account }
+    ${sessionScope.user_info[1].picture } --%>
     <%-- <div class="container" id="content">
    		首页
    		<%@ include file="../maker/goodsdata_entry.jsp" %>

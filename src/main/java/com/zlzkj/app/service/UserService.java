@@ -34,4 +34,10 @@ public class UserService {
 			return false;	
 		}
 	}
+	//根据账号 查询一条记录
+	public List<Row> select_one(String account){
+		String sql = "select * from x_user where account='"+account+"'";
+		List<Row> list = sqlRunner.select(sql);
+		return list;
+	}
 }

@@ -7,7 +7,6 @@
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="identity" property="identity" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="picture" property="picture" jdbcType="INTEGER" />
     <result column="gender" property="gender" jdbcType="VARCHAR" />
     <result column="birth" property="birth" jdbcType="VARCHAR" />
     <result column="phone" property="phone" jdbcType="VARCHAR" />
@@ -17,13 +16,21 @@
     <result column="role" property="role" jdbcType="INTEGER" />
     <result column="status" property="status" jdbcType="INTEGER" />
   </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zlzkj.app.model.User" extends="BaseResultMap" >
+    <result column="picture" property="picture" jdbcType="LONGVARCHAR" />
+  </resultMap>
   <sql id="Base_Column_List" >
-    id, account, password, identity, name, picture, gender, birth, phone, mail, address_first, 
+    id, account, password, identity, name, gender, birth, phone, mail, address_first, 
     address_second, role, status
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <sql id="Blob_Column_List" >
+    picture
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
     from x_user
     where id = #{id,jdbcType=INTEGER}
   </select>
@@ -33,15 +40,15 @@
   </delete>
   <insert id="insert" parameterType="com.zlzkj.app.model.User" >
     insert into x_user (id, account, password, 
-      identity, name, picture, 
-      gender, birth, phone, 
-      mail, address_first, address_second, 
-      role, status)
+      identity, name, gender, 
+      birth, phone, mail, 
+      address_first, address_second, role, 
+      status, picture)
     values (#{id,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{identity,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{picture,jdbcType=INTEGER}, 
-      #{gender,jdbcType=VARCHAR}, #{birth,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
-      #{mail,jdbcType=VARCHAR}, #{addressFirst,jdbcType=VARCHAR}, #{addressSecond,jdbcType=VARCHAR}, 
-      #{role,jdbcType=INTEGER}, #{status,jdbcType=INTEGER})
+      #{identity,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, 
+      #{birth,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{mail,jdbcType=VARCHAR}, 
+      #{addressFirst,jdbcType=VARCHAR}, #{addressSecond,jdbcType=VARCHAR}, #{role,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{picture,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.zlzkj.app.model.User" >
     insert into x_user
@@ -60,9 +67,6 @@
       </if>
       <if test="name != null" >
         name,
-      </if>
-      <if test="picture != null" >
-        picture,
       </if>
       <if test="gender != null" >
         gender,
@@ -88,6 +92,9 @@
       <if test="status != null" >
         status,
       </if>
+      <if test="picture != null" >
+        picture,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -104,9 +111,6 @@
       </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="picture != null" >
-        #{picture,jdbcType=INTEGER},
       </if>
       <if test="gender != null" >
         #{gender,jdbcType=VARCHAR},
@@ -132,6 +136,9 @@
       <if test="status != null" >
         #{status,jdbcType=INTEGER},
       </if>
+      <if test="picture != null" >
+        #{picture,jdbcType=LONGVARCHAR},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.zlzkj.app.model.User" >
@@ -148,9 +155,6 @@
       </if>
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="picture != null" >
-        picture = #{picture,jdbcType=INTEGER},
       </if>
       <if test="gender != null" >
         gender = #{gender,jdbcType=VARCHAR},
@@ -176,7 +180,27 @@
       <if test="status != null" >
         status = #{status,jdbcType=INTEGER},
       </if>
+      <if test="picture != null" >
+        picture = #{picture,jdbcType=LONGVARCHAR},
+      </if>
     </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zlzkj.app.model.User" >
+    update x_user
+    set account = #{account,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      identity = #{identity,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=VARCHAR},
+      birth = #{birth,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      mail = #{mail,jdbcType=VARCHAR},
+      address_first = #{addressFirst,jdbcType=VARCHAR},
+      address_second = #{addressSecond,jdbcType=VARCHAR},
+      role = #{role,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      picture = #{picture,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zlzkj.app.model.User" >
@@ -185,7 +209,6 @@
       password = #{password,jdbcType=VARCHAR},
       identity = #{identity,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
-      picture = #{picture,jdbcType=INTEGER},
       gender = #{gender,jdbcType=VARCHAR},
       birth = #{birth,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
