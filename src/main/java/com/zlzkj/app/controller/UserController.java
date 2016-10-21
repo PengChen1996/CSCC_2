@@ -75,4 +75,10 @@ public class UserController extends BaseController{
 			return "user/login";
 		}
 	}
+	//个人资料
+	@RequestMapping(value={"user/userinfo_page"})
+	public String userinfo_page() {
+		System.out.println("user/userinfo_page");
+		return "user/userinfo";
+	}
 }

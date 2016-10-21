@@ -23,6 +23,8 @@ public class User {
 
     private String addressSecond;
 
+    private String introduction;
+
     private Integer role;
 
     private Integer status;
@@ -115,6 +117,14 @@ public class User {
 
     public void setAddressSecond(String addressSecond) {
         this.addressSecond = addressSecond == null ? null : addressSecond.trim();
+    }
+
+    public String getIntroduction() {
+        return introduction;
+    }
+
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction == null ? null : introduction.trim();
     }
 
     public Integer getRole() {

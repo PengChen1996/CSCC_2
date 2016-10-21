@@ -13,6 +13,7 @@
     <result column="mail" property="mail" jdbcType="VARCHAR" />
     <result column="address_first" property="addressFirst" jdbcType="VARCHAR" />
     <result column="address_second" property="addressSecond" jdbcType="VARCHAR" />
+    <result column="introduction" property="introduction" jdbcType="VARCHAR" />
     <result column="role" property="role" jdbcType="INTEGER" />
     <result column="status" property="status" jdbcType="INTEGER" />
   </resultMap>
@@ -21,7 +22,7 @@
   </resultMap>
   <sql id="Base_Column_List" >
     id, account, password, identity, name, gender, birth, phone, mail, address_first, 
-    address_second, role, status
+    address_second, introduction, role, status
   </sql>
   <sql id="Blob_Column_List" >
     picture
@@ -42,13 +43,15 @@
     insert into x_user (id, account, password, 
       identity, name, gender, 
       birth, phone, mail, 
-      address_first, address_second, role, 
-      status, picture)
+      address_first, address_second, introduction, 
+      role, status, picture
+      )
     values (#{id,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{identity,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, 
       #{birth,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{mail,jdbcType=VARCHAR}, 
-      #{addressFirst,jdbcType=VARCHAR}, #{addressSecond,jdbcType=VARCHAR}, #{role,jdbcType=INTEGER}, 
-      #{status,jdbcType=INTEGER}, #{picture,jdbcType=LONGVARCHAR})
+      #{addressFirst,jdbcType=VARCHAR}, #{addressSecond,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR}, 
+      #{role,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{picture,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.zlzkj.app.model.User" >
     insert into x_user
@@ -85,6 +88,9 @@
       </if>
       <if test="addressSecond != null" >
         address_second,
+      </if>
+      <if test="introduction != null" >
+        introduction,
       </if>
       <if test="role != null" >
         role,
@@ -130,6 +136,9 @@
       <if test="addressSecond != null" >
         #{addressSecond,jdbcType=VARCHAR},
       </if>
+      <if test="introduction != null" >
+        #{introduction,jdbcType=VARCHAR},
+      </if>
       <if test="role != null" >
         #{role,jdbcType=INTEGER},
       </if>
@@ -174,6 +183,9 @@
       <if test="addressSecond != null" >
         address_second = #{addressSecond,jdbcType=VARCHAR},
       </if>
+      <if test="introduction != null" >
+        introduction = #{introduction,jdbcType=VARCHAR},
+      </if>
       <if test="role != null" >
         role = #{role,jdbcType=INTEGER},
       </if>
@@ -198,6 +210,7 @@
       mail = #{mail,jdbcType=VARCHAR},
       address_first = #{addressFirst,jdbcType=VARCHAR},
       address_second = #{addressSecond,jdbcType=VARCHAR},
+      introduction = #{introduction,jdbcType=VARCHAR},
       role = #{role,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},
       picture = #{picture,jdbcType=LONGVARCHAR}
@@ -215,6 +228,7 @@
       mail = #{mail,jdbcType=VARCHAR},
       address_first = #{addressFirst,jdbcType=VARCHAR},
       address_second = #{addressSecond,jdbcType=VARCHAR},
+      introduction = #{introduction,jdbcType=VARCHAR},
       role = #{role,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
