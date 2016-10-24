@@ -81,4 +81,10 @@ public class UserController extends BaseController{
 		System.out.println("user/userinfo_page");
 		return "user/userinfo";
 	}
+	//编辑个人资料
+	@RequestMapping(value={"user/modifyinfo_page"})
+	public String modifyinfo_page() {
+		System.out.println("user/modifyinfo_page");
+		return "user/modifyinfo";
+	}
 }

@@ -38,7 +38,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="col-md-9" style="border-bottom: 1px solid #d5d5d5;">
                     <h3 >
                         ${sessionScope.user_info[0].account }
-                        <button type="button" class="btn btn-default btn-xs pull-right">编辑个人资料</button>
+                        <a href="${z:u('user/modifyinfo_page')}" class="btn btn-default btn-xs pull-right">编辑个人资料</a>
                     </h3>
                 </div>
                 <div class="col-md-9">
