@@ -52,10 +52,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
         </div>
     </div>
-    <div class="container-fluid" style="border-top:1px solid #d5d5d5;">
-        <div class="container">
-            q
-        </div>
+    <div class="container" style="padding-left:36px;padding-right:50px;width:1000px;background: #fdfdfe;border-left:1px solid #d5d5d5;border-right:1px solid #d5d5d5;">
+    	<div class="row">
+    		<h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;最近操作</h4>
+    		<div class="col-md-12">
+    			<div class="panel panel-default" style="border-top:2px solid #c20c0c;">
+				  <!-- Default panel contents -->
+				  <div class="panel-heading">操作</div>
+				  <div class="panel-body">
+				    <p>#</p>
+				    <p>#</p>
+				    <p>#</p>
+				  </div>
+				</div>
+    		</div>
+    	</div>
+    	<br><br><br>
     </div>
+    <%@ include file="../index/foot.jsp" %>
   </body>
 </html>

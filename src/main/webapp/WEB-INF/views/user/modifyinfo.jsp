@@ -22,7 +22,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" href="${__static__}/bootstrap3/css/bootstrap.css"/>
     <script type="text/javascript" src="${__static__}/bootstrap3/js/jquery2.1.4.js"></script>
     <script type="text/javascript" src="${__static__}/bootstrap3/js/bootstrap.js"></script>
-	
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var gender = '${sessionScope.user_info[1].gender}';
+			if(gender=="男"){
+				$("input[name='gender']").get(0).checked=true;
+			}
+			else if(gender=="女"){
+				$("input[name='gender']").get(1).checked=true;
+			}
+			else{
+				$("input[name='gender']").get(2).checked=true;
+			}
+		});
+	</script>
   </head>
   
   <body>
@@ -51,13 +64,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                            <div class="form-group">
 	                                <p class="col-sm-2 control-label">帐号:</p>
 	                                <div class="col-sm-10">
-	                                    <input type="text" class="form-control" placeholder="帐号">
+	                                    <input type="text" class="form-control" value="${sessionScope.user_info[0].account }" placeholder="帐号">
 	                                </div>
 	                            </div>
 	                            <div class="form-group">
 	                                <p class="col-sm-2 control-label">介绍:</p>
 	                                <div class="col-sm-10">
-	                                    <textarea class="form-control" rows="6" placeholder="介绍"></textarea>
+	                                    <textarea class="form-control" rows="6" placeholder="介绍">${sessionScope.user_info[1].introduction }</textarea>
 	                                </div>
 	                            </div>
 	                            <div class="form-group">
@@ -187,10 +200,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        </div>
 	    </div>
 	</div>
-	<div class="container-fluid" style="border-top:1px solid #d5d5d5;">
-	    <div class="container">
-	        q
-	    </div>
-	</div>
+	<%@ include file="../index/foot.jsp" %>
   </body>
 </html>

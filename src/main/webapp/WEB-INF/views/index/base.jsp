@@ -86,9 +86,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						    <span class="caret"></span>
 						  </button>
 						  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-						    <li role="presentation"><a role="menuitem" tabindex="-1" href="${z:u('user/userinfo_page')}">个人中心</a></li>
-						    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">设置</a></li>
-						    <li role="presentation"><a role="menuitem" tabindex="-1" href="${z:u('user/login_page')}">退出</a></li>
+						    <li role="presentation"><a role="menuitem" tabindex="-1" href="${z:u('user/userinfo_page')}"><span class="glyphicon glyphicon-user"></span> 个人中心</a></li>
+						    <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="glyphicon glyphicon-th-large"></span> 操作中心</a></li>
+						    <li role="presentation"><a role="menuitem" tabindex="-1" href="${z:u('user/modifyinfo_page')}"><span class="glyphicon glyphicon-cog"></span> 设置</a></li>
+						    <li role="presentation"><a role="menuitem" tabindex="-1" href="${z:u('user/login_page')}"><span class="glyphicon glyphicon-off"></span> 退出</a></li>
 						  </ul>
 						</div>
 					</c:if> 
