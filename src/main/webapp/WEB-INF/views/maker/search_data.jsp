@@ -39,6 +39,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   						var goods_info = "";
   						var parts_info = "";
   						$("#parts_content").html("");
+  						//alert(json_data.goods);
 	  					$.each(json_data.goods,function(index,item){
 	  						goods_info = "<div class='media'>"+
 											  "<a class='media-left' href='#'>"+

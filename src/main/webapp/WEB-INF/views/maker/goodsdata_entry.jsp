@@ -27,7 +27,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	<script type="text/javascript">
   		function entry_goods(){
   			$.ajax({
-  				url:"maker/goodsdata_entry",
+  				url:"${z:u('maker/goodsdata_entry')}",
   				data:$("#form_goods").serialize(),
   				type:"post",
   				success:function(data){
@@ -58,7 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				partsBelongs:$("#parts_belongs").val(),
   			}
 	  		$.ajax({
-	  			url:"maker/partsdata_entry",
+	  			url:"${z:u('maker/partsdata_entry')}",
   				data:parts,
   				type:"post",
   				success:function(){
