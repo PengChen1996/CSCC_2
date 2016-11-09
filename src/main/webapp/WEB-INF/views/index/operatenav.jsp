@@ -25,6 +25,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    font-family: "Microsoft YaHei";
 		    font-size: 14px;
 		}
+		#goods_list span{
+			cursor:pointer;
+		}
 	</style>
   </head>
   
@@ -42,44 +45,51 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    <div class="row">
 	        <div class="col-md-3">
 	            <div id="operate_list" class="list-group" style="width:200px;">
-	                <a href="#" class="list-group-item active" style="border-radius: 0;"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;彩码查看</a>
-	                <a href="#" class="list-group-item "><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;彩码查询</a>
-	                <a href="#" class="list-group-item"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;操作日志</a>
-	                <a class="list-group-item"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;操作日志</a>
-	                <a onclick="getgoodsinfo()" class="list-group-item" style="border-radius: 0;"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;操作日志</a>
+	                <a id="welcome" href="${z:u('operate/operate_center_page')}" class="list-group-item" style="border-radius: 0;"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;欢迎页</a>
+	                <a id="auditinfo" href="${z:u('operate/auditinfo_page')}" class="list-group-item"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;审核操作</a>
+	                <a id="auditrecord" href="${z:u('operate/auditrecord_page')}" class="list-group-item"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;通过审核</a>
+	                <a id="aduit_reject" href="${z:u('operate/audit_reject_page')}" class="list-group-item"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;未通过审核</a>
+	                <a id="aduit_trash" href="${z:u('operate/audit_trash_page')}" class="list-group-item"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;回收站</a>
+	                <a href="#" class="list-group-item" style="border-radius: 0;"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;操作日志</a>
 	            </div>
 	        </div>
 	        <br>
-	        <div id="operate_content" class="col-md-9" style="margin-left: -25px;min-height: 400px;">
-	            <!--<ol class="breadcrumb" style="width: 796px;margin-left: -30px;margin-top: -20px;">-->
-	                <!--<li><a href="#">Home</a></li>-->
-	                <!--<li><a href="#">Library</a></li>-->
-	                <!--<li class="active">Data</li>-->
-	            <!--</ol>-->
-	            <!-- <table class="table table-bordered">
-	                <tr style="background: #f6f6f8;">
+	        <div class="col-md-9" style="margin-left: -25px;min-height: 400px;">
+				<!-- <ol class="breadcrumb" style="width: 796px;margin-left: -30px;margin-top: -20px;">
+	                <li><a href="#">Home</a></li>
+	                <li><a href="#">Library</a></li>
+	                <li class="active">Data</li>
+	            </ol> -->
+	            <table id="goods_list" class="table table-striped">
+	                <!-- <tr style="background: #f6f6f8;">
 	                    <th>#</th>
+	                    <th>名称</th>
 	                    <th>1</th>
 	                    <th>1</th>
 	                    <th>1</th>
-	                </tr>
-	                <tr>
-	                    <td>2</td>
-	                    <td>2</td>
-	                    <td>2</td>
-	                    <td>2</td>
-	                </tr>
-	            </table> -->
+	                    <th>1</th>
+	                </tr> -->
+	                <!-- <tr>
+	                    goodslist
+	                </tr> -->
+	                <!-- <nav>
+					  <ul class="pager">
+					    <li><a href="#">Previous</a></li>
+					    <li><a href="#">Next</a></li>
+					  </ul>
+					</nav> -->
+	            </table>
 	        </div>
 	    </div>
 	</div>
-	<script>
+	
+	<!-- <script>
 	    $(document).ready(function(){
 	        $("#operate_list a").click(function(){
 	            $(this).siblings().removeClass("active");
 	            $(this).addClass("active");
 	        });
 	    });
-	</script>
+	</script> -->
   </body>
 </html>

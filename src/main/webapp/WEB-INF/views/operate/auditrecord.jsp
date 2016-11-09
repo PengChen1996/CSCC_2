@@ -11,7 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'audit_info.jsp' starting page</title>
+    <title>My JSP 'operate_record.jsp' starting page</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -21,7 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-	<link rel="stylesheet" href="${__static__}/bootstrap3/css/bootstrap.css"/>
+<link rel="stylesheet" href="${__static__}/bootstrap3/css/bootstrap.css"/>
     <script type="text/javascript" src="${__static__}/bootstrap3/js/jquery2.1.4.js"></script>
     <script type="text/javascript" src="${__static__}/bootstrap3/js/bootstrap.js"></script>
   	<style>
@@ -35,12 +35,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 	</style>
 	<script type="text/javascript">
-		function getgoodsinfo(current_page){
+		function getmyrecords(current_page){
+			var signature_two = '${sessionScope.user_info[0].account}';
 			var data = {
-				current_page:current_page
+				current_page:current_page,
+				signature_two:signature_two,
+				goods_status:1,		//选择通过列表
 			};
 			$.ajax({
-				url:"${z:u('operate/auditinfo')}",
+				url:"${z:u('operate/auditrecord')}",
 				data:data,
 				type:"post",
 				success:function(data){
@@ -55,7 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						                    "<th>操作</th>"+
 						                  "</tr>";
 					$("#goods_list").html(goodslist_title);
-					$.each(json_data.allgoodslist,function(index,item){
+					$.each(json_data.myrecordslist,function(index,item){
 			          	var goodslist = "<tr>"+
 						                    "<td>"+item.goods_id+"</td>"+
 						                    "<td>"+item.goods_name+"</td>"+
@@ -65,8 +68,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						                    "<td>"+
 						                    	"<span title='点击查看' class='glyphicon glyphicon-hand-up' data-toggle='tooltip' data-placement='bottom'></span>&nbsp;&nbsp;"+
 						                    	"<span title='修改' class='glyphicon glyphicon-edit' data-toggle='tooltip' data-placement='bottom'></span>&nbsp;&nbsp;"+
-						                    	"<span title='通过' onclick=audit('"+item.goods_id+"',1,"+current_page+") class='glyphicon glyphicon-ok' data-toggle='tooltip' data-placement='bottom'></span>&nbsp;&nbsp;"+
-						                    	"<span title='否决' onclick=audit('"+item.goods_id+"',2,"+current_page+") class='glyphicon glyphicon-remove' data-toggle='tooltip' data-placement='bottom'></span>"+
+						                    	"<span title='重新审核' class='glyphicon glyphicon-repeat' data-toggle='tooltip' data-placement='bottom'></span>&nbsp;&nbsp;"+
+						                    	"<span title='移除' onclick=audit('"+item.goods_id+"',-1,"+current_page+") class='glyphicon glyphicon-trash' data-toggle='tooltip' data-placement='bottom'></span>"+
 						                    "</td>"+
 				                		"</tr>";
 						$("#goods_list").append(goodslist);
@@ -74,15 +77,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						$(function () { $("[data-toggle='tooltip']").tooltip(); });
 					});
 					/* 分页 */
+					
 					var current = json_data.current_page;//当前页
 					var total = json_data.total_page>0?(json_data.total_page):1;//总页数
 					var pre = (current-1)>=1?(current-1):1;
 					var next = (current+1)>total?total:(current+1);
 					var pre_next = "<tr><td colspan='6'>"+
 										"<ul class='pager' style='margin-left:66%;'>"+
-										  "<li><a onclick='getgoodsinfo("+pre+")'><span class='glyphicon glyphicon-chevron-left'></span></a></li>"+
-										  "<li>&nbsp;&nbsp;<a>"+current+"</a>/<a onclick='getgoodsinfo("+total+")'>"+total+"</a>&nbsp;&nbsp;</li>"+
-										  "<li><a onclick='getgoodsinfo("+next+")'><span class='glyphicon glyphicon-chevron-right'></span></a></li>"+
+										  "<li><a onclick='getmyrecords("+pre+")'><span class='glyphicon glyphicon-chevron-left'></span></a></li>"+
+										  "<li>&nbsp;&nbsp;<a>"+current+"</a>/<a onclick='getmyrecords("+total+")'>"+total+"</a>&nbsp;&nbsp;</li>"+
+										  "<li><a onclick='getmyrecords("+next+")'><span class='glyphicon glyphicon-chevron-right'></span></a></li>"+
 										"</ul>"+
 									"</td></tr>";
 					$("#goods_list").append(pre_next);
@@ -92,6 +96,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				}
 			});
 		}
+		
 		//审核   -1是回收站1是通过 2是否决
 		function audit(goods_id,goods_status,currentpage){
 			var signature_two = '${sessionScope.user_info[0].account}';
@@ -106,7 +111,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				type:"post",
 				success:function(data){
 					alert("success!");
-					getgoodsinfo(currentpage);//刷新
+					getmyrecords(currentpage);//刷新
 				},
 				error:function(){
 					alert("error!");
@@ -123,59 +128,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript">
 		/* 审核第一页的内容 */
 		window.onload = function(){
-			getgoodsinfo(1);
-			$("#auditinfo").addClass("active");
+			getmyrecords(1);
+			$("#auditrecord").addClass("active");
 		};
 	</script>
-	
-    <!-- <div class="container" style="margin-top:-20px;padding-left:0px;width:1000px;background: #fdfdfe;border-left:1px solid #d5d5d5;border-right:1px solid #d5d5d5;">
-    填充下
-	    <br>
-	    <div class="row">
-	        <div class="col-md-12"style="width:1000px;margin-left:15px;border-bottom: 1px solid #d5d5d5;">
-	            <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;操作中心</h3>
-	        </div>
-	    </div>
-	</div>
-	<div class="container" style="padding-left:0px;padding-right:0px;width:1000px;background: #fdfdfe;border-left:1px solid #d5d5d5;border-right:1px solid #d5d5d5;">
-	    <div class="row">
-	        <div class="col-md-3">
-	            <div id="operate_list" class="list-group" style="width:200px;">
-	                <a href="#" class="list-group-item active" style="border-radius: 0;"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;彩码查看</a>
-	                <a href="#" class="list-group-item "><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;彩码查询</a>
-	                <a href="#" class="list-group-item"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;操作日志</a>
-	                <a class="list-group-item"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;操作日志</a>
-	                <a onclick="getgoodsinfo(1)" class="list-group-item" style="border-radius: 0;"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;审核操作</a>
-	            </div>
-	        </div>
-	        <br>
-	        <div class="col-md-9" style="margin-left: -25px;min-height: 400px;">
-				<ol class="breadcrumb" style="width: 796px;margin-left: -30px;margin-top: -20px;">
-	                <li><a href="#">Home</a></li>
-	                <li><a href="#">Library</a></li>
-	                <li class="active">Data</li>
-	            </ol>
-	            <table id="goods_list" class="table table-striped">
-	                <tr style="background: #f6f6f8;">
-	                    <th>#</th>
-	                    <th>名称</th>
-	                    <th>1</th>
-	                    <th>1</th>
-	                    <th>1</th>
-	                    <th>1</th>
-	                </tr>
-	                <tr>
-	                    goodslist
-	                </tr>
-	                <nav>
-					  <ul class="pager">
-					    <li><a href="#">Previous</a></li>
-					    <li><a href="#">Next</a></li>
-					  </ul>
-					</nav>
-	            </table>
-	        </div>
-	    </div>
-	</div> -->
   </body>
 </html>
