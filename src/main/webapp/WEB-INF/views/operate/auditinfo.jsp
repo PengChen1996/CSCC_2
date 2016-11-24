@@ -106,10 +106,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				type:"post",
 				success:function(data){
 					alert("success!");
+					log(goods_status,signature_two,goods_id);//日志
 					getgoodsinfo(currentpage);//刷新
 				},
 				error:function(){
 					alert("error!");
+				}
+			});
+		}
+		//日志
+		function log(op_type,op_user,oped_id){
+			switch(op_type){
+				case 1: op_type="通过审核";break;
+				case 2: op_type="否决审核";break;
+			}
+			var log ={
+				op_type:op_type,
+				op_user:op_user,
+				oped_id:oped_id
+			};
+			$.ajax({
+				url:"${z:u('/log')}",
+				type:"post",
+				data:log,
+				success:function(data){
+					console.log(data);
+				},
+				error:function(){
+					alert("error!");				
 				}
 			});
 		}

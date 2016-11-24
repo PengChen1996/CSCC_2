@@ -34,6 +34,13 @@
 			<mvc:mapping path="/**" />
 			<bean class="com.zlzkj.core.base.BaseInterceptor" />
 		</mvc:interceptor>
+		<mvc:interceptor>    
+		     <!-- 匹配的是url路径， 如果不配置或/**,将拦截所有的Controller -->  
+		    <mvc:mapping path="/" />  
+		    <mvc:mapping path="/operate/**" />
+		    <mvc:mapping path="/maker/**" />    
+		    <bean class="com.zlzkj.app.interceptor.CommonInterceptor"></bean>    
+		</mvc:interceptor>
 		<!-- <mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<bean class="com.zlzkj.app.Interceptor.CoreInterceptor">
@@ -42,12 +49,12 @@
 		              如果请求中是以以下路径开头，则不进行拦截
 		              <value>/static</value>
 		              <value>/index</value>
-
 		            </list>  
 	        	</property>
 			</bean>
 		</mvc:interceptor> -->
 	</mvc:interceptors>
+	
 	
 	<!-- 静态文件访问 -->
 	<mvc:resources mapping="/static/**" location="/static/" />

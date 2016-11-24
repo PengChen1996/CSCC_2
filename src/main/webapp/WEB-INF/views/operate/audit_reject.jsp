@@ -99,6 +99,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		//审核   -1是回收站1是通过 2是否决
 		function audit(goods_id,goods_status,currentpage){
+			if(goods_status=-1){
+						var press = confirm("确定移除？");
+						if(press){
+							//alert("success");
+						}else{
+							return;
+						}
+					}
 			var signature_two = '${sessionScope.user_info[0].account}';
 			var data = {
 				goods_id:goods_id,
