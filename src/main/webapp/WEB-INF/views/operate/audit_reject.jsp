@@ -68,7 +68,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						                    "<td>"+
 						                    	"<span title='点击查看' class='glyphicon glyphicon-hand-up' data-toggle='tooltip' data-placement='bottom'></span>&nbsp;&nbsp;"+
 						                    	"<span title='修改' class='glyphicon glyphicon-edit' data-toggle='tooltip' data-placement='bottom'></span>&nbsp;&nbsp;"+
-						                    	"<span title='重新审核' class='glyphicon glyphicon-repeat' data-toggle='tooltip' data-placement='bottom'></span>&nbsp;&nbsp;"+
+						                    	"<span title='重新审核' onclick=audit('"+item.goods_id+"',0,"+current_page+") class='glyphicon glyphicon-repeat' data-toggle='tooltip' data-placement='bottom'></span>&nbsp;&nbsp;"+
 						                    	"<span title='移除' onclick=audit('"+item.goods_id+"',-1,"+current_page+") class='glyphicon glyphicon-trash' data-toggle='tooltip' data-placement='bottom'></span>"+
 						                    "</td>"+
 				                		"</tr>";
@@ -99,7 +99,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		//审核   -1是回收站1是通过 2是否决
 		function audit(goods_id,goods_status,currentpage){
-			if(goods_status=-1){
+			if(goods_status==-1){
 						var press = confirm("确定移除？");
 						if(press){
 							//alert("success");

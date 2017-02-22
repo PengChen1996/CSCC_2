@@ -50,4 +50,10 @@ public class OperateService {
 		sqlRunner.update(sql);
 		return 0;
 	}
+	//查看一条记录
+	public List<Row> select_good(String goods_id){
+		String sql = "select * from x_goods where goods_id='"+goods_id+"'";
+		List<Row> list = sqlRunner.select(sql);
+		return list;
+	}
 }

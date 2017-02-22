@@ -67,7 +67,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						                    "<td>"+item.goods_productiontime+"</td>"+
 						                    "<td>"+
 						                    	"<span title='点击查看' class='glyphicon glyphicon-hand-up' data-toggle='tooltip' data-placement='bottom'></span>&nbsp;&nbsp;"+
-						                    	"<span title='恢复' class='glyphicon glyphicon-repeat' data-toggle='tooltip' data-placement='bottom'></span>&nbsp;&nbsp;"+
+						                    	"<span title='恢复' onclick=audit('"+item.goods_id+"',0,"+current_page+") class='glyphicon glyphicon-repeat' data-toggle='tooltip' data-placement='bottom'></span>&nbsp;&nbsp;"+
 						                    "</td>"+
 				                		"</tr>";
 						$("#goods_list").append(goodslist);
@@ -95,6 +95,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			});
 		}
 		
+		//审核   -1是回收站1是通过 2是否决
+		function audit(goods_id,goods_status,currentpage){
+			var signature_two = '${sessionScope.user_info[0].account}';
+			var data = {
+				goods_id:goods_id,
+				goods_status:goods_status,
+				signature_two:signature_two,
+			};
+			$.ajax({
+				url:"${z:u('operate/audit')}",
+				data:data,
+				type:"post",
+				success:function(data){
+					alert("success!");
+					getmyrecords(currentpage);//刷新
+				},
+				error:function(){
+					alert("error!");
+				}
+			});
+		}
 	</script>
   </head>
   

@@ -21,7 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-<link rel="stylesheet" href="${__static__}/bootstrap3/css/bootstrap.css"/>
+	<link rel="stylesheet" href="${__static__}/bootstrap3/css/bootstrap.css"/>
     <script type="text/javascript" src="${__static__}/bootstrap3/js/jquery2.1.4.js"></script>
     <script type="text/javascript" src="${__static__}/bootstrap3/js/bootstrap.js"></script>
   	<style>
@@ -66,9 +66,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						                    "<td>"+item.goods_productionarea+"</td>"+
 						                    "<td>"+item.goods_productiontime+"</td>"+
 						                    "<td>"+
-						                    	"<span title='点击查看' class='glyphicon glyphicon-hand-up' data-toggle='tooltip' data-placement='bottom'></span>&nbsp;&nbsp;"+
+						                    	"<span title='点击查看' onclick=checkgood('"+item.goods_id+"') class='glyphicon glyphicon-hand-up' data-toggle='tooltip' data-placement='bottom'></span>&nbsp;&nbsp;"+
 						                    	"<span title='修改' class='glyphicon glyphicon-edit' data-toggle='tooltip' data-placement='bottom'></span>&nbsp;&nbsp;"+
-						                    	"<span title='重新审核' class='glyphicon glyphicon-repeat' data-toggle='tooltip' data-placement='bottom'></span>&nbsp;&nbsp;"+
+						                    	"<span title='重新审核' onclick=audit('"+item.goods_id+"',0,"+current_page+") class='glyphicon glyphicon-repeat' data-toggle='tooltip' data-placement='bottom'></span>&nbsp;&nbsp;"+
 						                    	"<span title='移除' onclick=audit('"+item.goods_id+"',-1,"+current_page+") class='glyphicon glyphicon-trash' data-toggle='tooltip' data-placement='bottom'></span>"+
 						                    "</td>"+
 				                		"</tr>";
@@ -99,7 +99,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		//审核   -1是回收站1是通过 2是否决
 		function audit(goods_id,goods_status,currentpage){
-			if(goods_status=-1){
+			if(goods_status==-1){
 					var press = confirm("确定移除？");
 					if(press){
 						//alert("success");
@@ -126,6 +126,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				}
 			});
 		}
+		
+		//查看一条记录
+		function checkgood(goods_id){
+			var data ={
+				goods_id:goods_id
+			};
+			$.ajax({
+				url:"${z:u('operate/selectgood')}",
+				type:"post",
+				dataType:"json",
+				data:data,
+				success:function(data){
+					console.log(data.good[0].id);
+					var content = data.good[0].id;
+					$('#model_body').html(content);
+					$('.modal').modal('show');
+				},
+				error:function(){
+					console.log("error!");
+				}
+			});
+		}
 	</script>
   </head>
   
@@ -140,5 +162,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			$("#auditrecord").addClass("active");
 		};
 	</script>
+	<!-- 模态框 -->
+	<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<!-- <h4 class="modal-title" id="myModalLabel">Modal title</h4> -->
+				</div>
+				<div class="modal-body" id="model_body">
+			        ...
+			    </div>
+			    <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			        <button type="button" class="btn btn-primary">Save changes</button>
+			    </div>
+			</div>
+		</div>
+	</div>
+	<!-- / -->
   </body>
 </html>

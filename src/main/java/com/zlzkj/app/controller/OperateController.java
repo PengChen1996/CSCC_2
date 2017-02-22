@@ -141,5 +141,16 @@ public class OperateController extends BaseController {
 		
 		return null;
 	}
-	
+	//查看一条记录
+	@RequestMapping(value={"operate/selectgood"})
+	public String selectgood(Model model,HttpServletRequest request,HttpServletResponse response) throws IOException {
+		
+		String goods_id = request.getParameter("goods_id");
+		List<Row> list= operateService.select_good(goods_id);
+		PrintWriter out = response.getWriter();  
+		JSONObject jo = new JSONObject();
+		jo.put("good",list);
+		out.write(jo.toString());
+		return null;	
+	}
 }

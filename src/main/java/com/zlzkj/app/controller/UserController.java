@@ -37,7 +37,7 @@ public class UserController extends BaseController{
 		MD5String md5 = new MD5String();
 		user.setPassword(md5.getMD5Str(password));
 		
-		user.setPicture("../static/img/001.jpg");
+		user.setPicture("/CSCC_2/static/img/avatar.jpg");
 		user.setRole(0);
 		user.setStatus(0);
 		userService.register(user);
